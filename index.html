@@ -14,561 +14,509 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0c1220;--surface:#1a2332;--surface2:#111827;--border:#2d3748;--border2:#374151;--green:#22c55e;--green-bg:rgba(34,197,94,.08);--green-border:rgba(34,197,94,.2);--red:#ef4444;--red-bg:rgba(239,68,68,.07);--red-border:rgba(239,68,68,.2);--amber:#f59e0b;--text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;--blue:#3b82f6;--purple:#a78bfa}
-html,body{height:100%;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+:root{--bg:#0c1220;--sf:#1a2332;--sf2:#111827;--bd:#2d3748;--bd2:#374151;--g:#22c55e;--gbg:rgba(34,197,94,.08);--gbd:rgba(34,197,94,.2);--r:#ef4444;--rbg:rgba(239,68,68,.07);--rbd:rgba(239,68,68,.2);--a:#f59e0b;--t:#f1f5f9;--t2:#94a3b8;--t3:#64748b}
+html,body{height:100%;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t);overflow:hidden}
 #map{width:100%;height:100%;position:absolute;top:0;left:0;z-index:1}
 .leaflet-container{background:var(--bg)!important}
-/* TOPBAR */
-.topbar{position:absolute;top:0;left:0;right:0;z-index:1001;background:rgba(12,18,32,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 16px;height:50px;display:flex;align-items:center;gap:10px}
+.topbar{position:absolute;top:0;left:0;right:0;z-index:1001;background:rgba(12,18,32,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 16px;height:50px;display:flex;align-items:center;gap:10px}
 .topbar-brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .topbar-logo{width:24px;height:24px;border-radius:6px}
-.topbar-name{font-size:13px;font-weight:700}.topbar-name span{color:var(--green)}
-.topbar-tag{font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:2px 7px;border-radius:100px}
+.topbar-name{font-size:13px;font-weight:700}.topbar-name span{color:var(--g)}
+.topbar-tag{font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--g);background:var(--gbg);border:1px solid var(--gbd);padding:2px 7px;border-radius:100px}
 .search-wrap{flex:1;max-width:380px;position:relative}
-.search-input{width:100%;padding:6px 10px 6px 30px;border:1px solid var(--border);border-radius:7px;font-size:11px;font-family:'Inter',sans-serif;background:var(--surface2);color:var(--text);outline:none;transition:border-color .2s}
-.search-input:focus{border-color:var(--green);box-shadow:0 0 0 2px rgba(34,197,94,.15)}
-.search-input::placeholder{color:var(--text3)}
-.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:12px;pointer-events:none}
-.search-results{position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-top:4px;max-height:350px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.3);display:none;z-index:10}
-.search-results.vis{display:block}
-.sr-item{padding:7px 10px;cursor:pointer;border-bottom:1px solid var(--surface2);font-size:11px;transition:background .1s}
-.sr-item:hover{background:var(--surface2)}.sr-item:last-child{border-bottom:none}
-.sr-addr{font-weight:600}.sr-meta{color:var(--text3);font-size:9px;margin-top:1px}.sr-owner{color:var(--red);font-weight:500;font-size:10px}
-.sr-empty{padding:12px;text-align:center;font-size:11px;color:var(--text3)}
-/* Landlord search results - highlight all properties */
-.sr-ll{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--surface2);transition:background .1s}
-.sr-ll:hover{background:var(--surface2)}
-.sr-ll-name{font-weight:700;color:var(--red);font-size:12px}
-.sr-ll-stats{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text2);margin-top:2px}
-.topbar-links{display:flex;gap:12px;flex-shrink:0;margin-left:auto}.topbar-links a{font-size:11px;color:var(--text2);text-decoration:none;font-weight:500}.topbar-links a:hover{color:var(--green)}
-
-/* LEFT PANEL */
-.panel{position:absolute;top:62px;left:10px;z-index:1000;background:var(--surface);border:1px solid var(--border);border-radius:11px;width:280px;box-shadow:0 4px 20px rgba(0,0,0,.3);overflow:hidden;max-height:calc(100vh - 74px);display:flex;flex-direction:column}
+#sI{width:100%;padding:8px 10px 8px 30px;border:1px solid var(--bd);border-radius:7px;font-size:12px;font-family:inherit;background:var(--sf2);color:var(--t);outline:none}
+#sI:focus{border-color:var(--g);box-shadow:0 0 0 2px rgba(34,197,94,.15)}
+#sI::placeholder{color:var(--t3)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:12px;pointer-events:none}
+#sR{position:absolute;top:100%;left:0;right:0;background:var(--sf);border:1px solid var(--bd);border-radius:8px;margin-top:4px;max-height:350px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.3);display:none;z-index:10}
+#sR.vis{display:block}
+.sr-item{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--sf2);font-size:11px;min-height:38px}.sr-item:hover{background:var(--sf2)}
+.topbar-links{display:flex;gap:12px;flex-shrink:0;margin-left:auto}.topbar-links a{font-size:11px;color:var(--t2);text-decoration:none;font-weight:500}.topbar-links a:hover{color:var(--g)}
+.panel{position:absolute;top:62px;left:10px;z-index:1000;background:var(--sf);border:1px solid var(--bd);border-radius:11px;width:280px;box-shadow:0 4px 20px rgba(0,0,0,.3);overflow:hidden;max-height:calc(100vh - 74px);display:flex;flex-direction:column}
 .panel.collapsed .panel-body{display:none}
-.panel-header{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);cursor:pointer;flex-shrink:0}
-.panel-header:hover{background:var(--surface2)}
+.panel-header{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd);cursor:pointer;flex-shrink:0}.panel-header:hover{background:var(--sf2)}
 .panel-title{font-size:12px;font-weight:700}
-.panel-chevron{color:var(--text3);font-size:13px;transition:transform .3s}
+.panel-chevron{color:var(--t3);font-size:13px;transition:transform .3s}
 .panel.collapsed .panel-chevron{transform:rotate(180deg)}
 .panel-body{overflow-y:auto;flex:1}
-.panel-section{padding:10px 12px;border-bottom:1px solid var(--border)}
-.panel-sub{font-size:8px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.panel-section{padding:10px 12px;border-bottom:1px solid var(--bd)}
+.panel-sub{font-size:8px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
 .stat-row{display:flex;gap:4px;margin-bottom:8px}
-.stat{flex:1;background:var(--surface2);border-radius:6px;padding:6px;border:1px solid var(--border);text-align:center}
+.stat{flex:1;background:var(--sf2);border-radius:6px;padding:6px;border:1px solid var(--bd);text-align:center}
 .stat-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700}
-.stat-val.red{color:var(--red)}.stat-val.amber{color:var(--amber)}.stat-val.green{color:var(--green)}.stat-val.blue{color:var(--blue)}
-.stat-label{font-size:7px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;margin-top:1px}
+.stat-val.red{color:var(--r)}.stat-val.amber{color:var(--a)}.stat-val.green{color:var(--g)}
+.stat-label{font-size:7px;color:var(--t3);text-transform:uppercase;letter-spacing:.3px;margin-top:1px}
 .toggle-group{display:flex;flex-direction:column;gap:3px}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);cursor:pointer;transition:all .15s;font-size:10.5px;font-weight:500}
-.toggle-row:hover{border-color:var(--border2)}.toggle-row.active{border-color:var(--green);background:var(--green-bg)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px;background:var(--sf2);border-radius:6px;border:1px solid var(--bd);cursor:pointer;font-size:11px;font-weight:500;min-height:36px}
+.toggle-row:hover{border-color:var(--bd2)}.toggle-row.active{border-color:var(--g);background:var(--gbg)}
 .toggle-row .dot{width:5px;height:5px;border-radius:50%;margin-right:6px;flex-shrink:0;display:inline-block}
-.tsw{width:26px;height:14px;border-radius:7px;background:var(--border2);position:relative;transition:background .2s;flex-shrink:0}
-.toggle-row.active .tsw{background:var(--green)}
+.tsw{width:28px;height:14px;border-radius:7px;background:var(--bd2);position:relative;flex-shrink:0}
+.toggle-row.active .tsw{background:var(--g)}
 .tsw::after{content:'';position:absolute;width:10px;height:10px;border-radius:50%;background:#fff;top:2px;left:2px;transition:transform .2s}
-.toggle-row.active .tsw::after{transform:translateX(12px)}
-.load-status{font-size:9px;color:var(--text3);margin-top:6px}
-.load-bar{height:3px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden}
-.load-fill{height:100%;background:var(--green);border-radius:2px;transition:width .3s;width:0%}
-
-/* WORST LANDLORDS LIST */
-.ll-section{padding:0}
-.ll-section .panel-sub{padding:8px 12px 0;margin-bottom:0}
-.ll-search-wrap{padding:4px 12px 8px}
-.ll-search{width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:5px;font-size:10px;font-family:'Inter',sans-serif;background:var(--surface2);color:var(--text);outline:none}
-.ll-search:focus{border-color:var(--green)}
-.ll-search::placeholder{color:var(--text3)}
-.ll-list{max-height:300px;overflow-y:auto}
-.ll-item{display:flex;align-items:center;gap:6px;padding:6px 12px;cursor:pointer;border-bottom:1px solid rgba(45,55,72,.4);transition:background .1s;font-size:10px}
-.ll-item:hover{background:var(--red-bg)}
-.ll-rank{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--red);width:18px;text-align:center;flex-shrink:0}
+.toggle-row.active .tsw::after{transform:translateX(14px)}
+.load-status{font-size:9px;color:var(--t3);margin-top:6px}
+.load-bar{height:3px;background:var(--bd);border-radius:2px;margin-top:3px;overflow:hidden}
+.load-fill{height:100%;background:var(--g);border-radius:2px;transition:width .3s;width:0%}
+#llSearch{width:100%;padding:6px 8px;border:1px solid var(--bd);border-radius:5px;font-size:10px;font-family:inherit;background:var(--sf2);color:var(--t);outline:none;margin:4px 0 8px}
+#llSearch:focus{border-color:var(--g)}
+#llSearch::placeholder{color:var(--t3)}
+#llList{max-height:500px;overflow-y:auto}
+.ll-item{display:flex;align-items:center;gap:6px;padding:8px 12px;cursor:pointer;border-bottom:1px solid rgba(45,55,72,.4);font-size:10px;min-height:40px}
+.ll-item:hover{background:var(--rbg)}
+.ll-rank{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--r);width:20px;text-align:center;flex-shrink:0}
 .ll-info{flex:1;min-width:0}
 .ll-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ll-details{font-size:9px;color:var(--text3)}
-.ll-vcount{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);flex-shrink:0;font-weight:600}
-.ll-item.active{background:var(--red-bg);border-left:3px solid var(--red)}
-
-/* RIGHT INFO PANEL */
-.info-panel{position:absolute;top:62px;right:10px;z-index:1000;background:var(--surface);border:1px solid var(--border);border-radius:11px;width:340px;max-height:calc(100vh - 74px);box-shadow:0 4px 20px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden}
-.info-panel.visible{display:flex}
-.info-head{padding:12px;flex-shrink:0;border-bottom:1px solid var(--border)}
+.ll-details{font-size:9px;color:var(--t3)}
+.ll-vcount{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--a);flex-shrink:0;font-weight:600}
+.ll-item.active{background:var(--rbg);border-left:3px solid var(--r)}
+#ip{position:absolute;top:62px;right:10px;z-index:1000;background:var(--sf);border:1px solid var(--bd);border-radius:11px;width:340px;max-height:calc(100vh - 74px);box-shadow:0 4px 20px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden}
+#ip.visible{display:flex}
+.info-head{padding:12px;flex-shrink:0;border-bottom:1px solid var(--bd)}
 .info-head h3{font-size:13px;font-weight:700;padding-right:28px}
-.info-addr{font-size:10px;color:var(--text2);margin-top:2px}
-.info-owner{font-size:11px;font-weight:600;color:var(--red);padding:6px 9px;background:var(--red-bg);border-radius:6px;margin-top:6px;border:1px solid var(--red-border)}
-.info-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:6px}
-.info-stat{background:var(--surface2);border-radius:5px;padding:5px;border:1px solid var(--border);text-align:center}
+.info-addr{font-size:10px;color:var(--t2);margin-top:2px}
+#iO{font-size:11px;font-weight:600;color:var(--r);padding:6px 9px;background:var(--rbg);border-radius:6px;margin-top:6px;border:1px solid var(--rbd)}
+#iS{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:6px}
+.info-stat{background:var(--sf2);border-radius:5px;padding:5px;border:1px solid var(--bd);text-align:center}
 .info-stat b{font-family:'JetBrains Mono',monospace;font-size:12px;display:block}
-.info-stat small{font-size:7px;color:var(--text3);text-transform:uppercase}
-.info-close{position:absolute;top:8px;right:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text3);font-size:12px;cursor:pointer;width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;z-index:2}
-.info-close:hover{color:var(--text)}
-.complaint-list{flex:1;overflow-y:auto;padding:0 12px 12px}
-.complaint-list-header{font-size:8px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);padding:8px 0 5px;position:sticky;top:0;background:var(--surface);z-index:1}
-.complaint-item{padding:6px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;margin-bottom:3px;font-size:10px}
-.complaint-item:hover{border-color:var(--border2)}
-.complaint-item .c-type{font-weight:600;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-.complaint-item .c-desc{color:var(--text2);font-size:9px;line-height:1.4;margin-top:2px;max-height:48px;overflow:hidden}
-.complaint-item .c-meta{display:flex;gap:6px;margin-top:3px;font-size:8px;color:var(--text3);font-family:'JetBrains Mono',monospace;flex-wrap:wrap}
-.c-badge{display:inline-block;padding:1px 4px;border-radius:3px;font-size:7px;font-weight:600;text-transform:uppercase}
-.c-badge.open{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
-.c-badge.closed{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-.c-badge.classC{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
-.c-badge.classB{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
-.c-badge.classA{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.15)}
-
-/* CLUSTERS */
+.info-stat small{font-size:7px;color:var(--t3);text-transform:uppercase}
+.info-close{position:absolute;top:8px;right:8px;background:var(--sf2);border:1px solid var(--bd);color:var(--t3);font-size:14px;cursor:pointer;width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;z-index:2}
+.info-close:hover{color:var(--t)}
+#iL{flex:1;overflow-y:auto;padding:0 12px 12px}
+.complaint-list-header{font-size:8px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);padding:8px 0 5px;position:sticky;top:0;background:var(--sf);z-index:1}
+.complaint-item{padding:7px 8px;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;margin-bottom:3px;font-size:10px;cursor:pointer;min-height:36px}
+.complaint-item:hover{border-color:var(--bd2)}
+.complaint-item .c-meta{display:flex;gap:6px;margin-top:3px;font-size:9px;color:var(--t3);font-family:'JetBrains Mono',monospace;flex-wrap:wrap}
 .marker-cluster-small{background:rgba(239,68,68,.2)!important}.marker-cluster-small div{background:rgba(239,68,68,.7)!important;color:#fff!important;font-family:'JetBrains Mono',monospace!important;font-weight:600!important;font-size:10px!important}
 .marker-cluster-medium{background:rgba(245,158,11,.2)!important}.marker-cluster-medium div{background:rgba(245,158,11,.7)!important;color:#fff!important;font-family:'JetBrains Mono',monospace!important;font-weight:600!important;font-size:10px!important}
 .marker-cluster-large{background:rgba(239,68,68,.25)!important}.marker-cluster-large div{background:rgba(239,68,68,.85)!important;color:#fff!important;font-family:'JetBrains Mono',monospace!important;font-weight:700!important;font-size:11px!important}
-.bldg-dot{border-radius:50%;cursor:pointer;transition:box-shadow .2s}.bldg-dot:hover{box-shadow:0 0 0 3px rgba(239,68,68,.3),0 0 14px rgba(239,68,68,.4)!important}
+.bldg-dot{border-radius:50%;cursor:pointer}.bldg-dot:hover{box-shadow:0 0 0 3px rgba(239,68,68,.3),0 0 14px rgba(239,68,68,.4)!important}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:.9}}
+.bldg-highlight{animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 /* RENT LABELS */
-.rent-label{background:rgba(12,18,32,.88)!important;border:1px solid var(--border)!important;border-radius:6px!important;padding:3px 7px!important;font-family:'JetBrains Mono',monospace!important;font-size:10px!important;font-weight:600!important;white-space:nowrap!important;box-shadow:0 2px 6px rgba(0,0,0,.3)!important;cursor:pointer!important;transition:border-color .2s!important}
-.rent-label:hover{border-color:var(--amber)!important}
+.rent-label{background:rgba(12,18,32,.88)!important;border:1px solid #2d3748!important;border-radius:6px!important;padding:3px 7px!important;font-family:'JetBrains Mono',monospace!important;font-size:10px!important;font-weight:600!important;white-space:nowrap!important;box-shadow:0 2px 6px rgba(0,0,0,.3)!important;cursor:pointer!important;transition:border-color .2s!important}
+.rent-label:hover{border-color:#f59e0b!important}
 /* RENT POPUP */
-.rent-popup .leaflet-popup-content-wrapper{background:var(--surface)!important;border:1px solid var(--border)!important;border-radius:10px!important;padding:0!important;box-shadow:0 8px 24px rgba(0,0,0,.4)!important}
+.rent-popup .leaflet-popup-content-wrapper{background:#1a2332!important;border:1px solid #2d3748!important;border-radius:10px!important;padding:0!important;box-shadow:0 8px 24px rgba(0,0,0,.4)!important}
 .rent-popup .leaflet-popup-content{margin:0!important;width:280px!important}
-.rent-popup .leaflet-popup-tip{background:var(--surface)!important;border:1px solid var(--border)!important}
-.leaflet-popup-close-button{color:var(--text3)!important;font-size:16px!important;top:6px!important;right:8px!important}
-/* Highlighted buildings (when clicking landlord) */
-.bldg-highlight{animation:pulse 1.5s ease infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(239,68,68,.3)}50%{box-shadow:0 0 0 8px rgba(239,68,68,.15),0 0 20px rgba(239,68,68,.3)}}
-
-.leaflet-tooltip{background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:7px!important;padding:7px 9px!important;box-shadow:0 4px 12px rgba(0,0,0,.3)!important;font-family:'Inter',sans-serif!important}
-.leaflet-tooltip-top:before{border-top-color:var(--border)!important}
-.source-badge{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);z-index:1000;background:rgba(12,18,32,.9);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:7px;color:var(--text3);font-family:'JetBrains Mono',monospace;white-space:nowrap}
-.source-badge a{color:var(--green);text-decoration:none}
-.lo{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s}.lo.done{opacity:0;pointer-events:none}
-.lo-logo{display:flex;align-items:center;gap:10px;margin-bottom:16px}.lo-logo img{width:32px;height:32px;border-radius:8px}.lo-logo span{font-size:16px;font-weight:700}.lo-logo em{color:var(--green);font-style:normal}
-.lo-bar{width:220px;height:3px;background:var(--border);border-radius:2px;overflow:hidden}.lo-fill{width:0;height:100%;background:var(--green);border-radius:2px;transition:width .4s}
-.lo-msg{margin-top:12px;font-size:11px;color:var(--text3);text-align:center;max-width:300px}
-.lo-err{color:var(--red);margin-top:8px;font-size:11px;display:none}
-@media(max-width:700px){.topbar{padding:0 8px;height:44px}.topbar-tag,.topbar-links{display:none}.search-wrap{max-width:none}.panel{width:230px;top:54px;left:6px}.info-panel{width:calc(100% - 12px);top:auto;bottom:6px;right:6px;max-height:50vh}}
+.rent-popup .leaflet-popup-tip{background:#1a2332!important;border:1px solid #2d3748!important}
+.leaflet-popup-close-button{color:#64748b!important;font-size:16px!important;top:6px!important;right:8px!important}
+#lo{position:absolute;inset:0;z-index:2000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s}
+#lo.done{opacity:0;pointer-events:none}
+#lo .load-bar{width:260px;height:4px}
+#loMsg{font-size:13px;color:var(--t2)}
+#loErr{color:var(--r);font-size:11px;display:none}
 </style>
 </head>
 <body>
-<div class="lo" id="lo"><div class="lo-logo"><img src="https://www.civicreset.org/logo.png" alt="" onerror="this.style.display='none'"><span>Civic<em>Reset</em></span></div><div class="lo-bar"><div class="lo-fill" id="loFill"></div></div><div class="lo-msg" id="loMsg">Connecting to NYC Open Data...</div><div class="lo-err" id="loErr"></div></div>
-<div class="topbar">
-  <div class="topbar-brand"><img src="https://www.civicreset.org/logo.png" alt="" class="topbar-logo" onerror="this.style.display='none'"><span class="topbar-name">Civic<span>Reset</span></span><span class="topbar-tag">Landlord Map</span></div>
-  <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="searchInput" type="text" placeholder="Search address or landlord name..." autocomplete="off"><div class="search-results" id="searchResults"></div></div>
-  <div class="topbar-links"><a href="https://www.civicreset.org/articles" target="_blank">Articles</a><a href="https://www.civicreset.org/get-involved" target="_blank">Get Involved</a><a href="https://www.civicreset.org/donate" target="_blank">Donate</a></div>
-</div>
 <div id="map"></div>
-<div class="panel" id="panel">
-  <div class="panel-header" onclick="document.getElementById('panel').classList.toggle('collapsed')"><span class="panel-title">🏚️ NYC Violation Map</span><span class="panel-chevron">▾</span></div>
+<div id="lo">
+  <div style="font-size:22px;font-weight:800">NYC Bad Landlord<span style="color:var(--g)"> Heatmap</span></div>
+  <div style="font-size:10px;color:var(--t3)">Source: NYC Public Advocate 2025 Worst Landlord Watchlist</div>
+  <div class="load-bar"><div class="load-fill" id="loFill"></div></div>
+  <div id="loMsg">Loading building data...</div>
+  <div id="loErr"></div>
+</div>
+<div class="topbar">
+  <div class="topbar-brand"><img src="https://www.civicreset.org/logo.png" class="topbar-logo" alt="" onerror="this.style.display='none'"><div class="topbar-name">Civic<span>Reset</span></div><div class="topbar-tag">Bad Landlord Map</div></div>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" id="sI" placeholder="Search address or landlord..."><div id="sR"></div></div>
+  <div class="topbar-links"><a href="https://civicreset.org" target="_blank">civicreset.org</a><a href="https://www.landlordwatchlist.com" target="_blank">Watchlist ↗</a></div>
+</div>
+<div class="panel" id="lp">
+  <div class="panel-header" onclick="document.getElementById('lp').classList.toggle('collapsed')"><div class="panel-title">🏚 Top 25 Worst Landlords</div><div class="panel-chevron">▾</div></div>
   <div class="panel-body">
     <div class="panel-section">
-      <div class="panel-sub">Live HPD Data</div>
       <div class="stat-row">
-        <div class="stat"><div class="stat-val red" id="sV">—</div><div class="stat-label">Violations</div></div>
+        <div class="stat"><div class="stat-val red" id="sV">—</div><div class="stat-label">Top 25 Violations</div></div>
         <div class="stat"><div class="stat-val amber" id="sB">—</div><div class="stat-label">Buildings</div></div>
-        <div class="stat"><div class="stat-val blue" id="sO">—</div><div class="stat-label">Open</div></div>
+        <div class="stat"><div class="stat-val green" id="sP">—</div><div class="stat-label">of NYC Total</div></div>
       </div>
-      <div class="panel-sub">Layers</div>
       <div class="toggle-group">
-        <div class="toggle-row active" onclick="tog(this,'markers')"><span><span class="dot" style="background:var(--red)"></span>Violations</span><span class="tsw"></span></div>
-        <div class="toggle-row active" onclick="tog(this,'heat')"><span><span class="dot" style="background:var(--amber)"></span>Heatmap</span><span class="tsw"></span></div>
-        <div class="toggle-row" onclick="tog(this,'rent')"><span><span class="dot" style="background:var(--blue)"></span>Rent Prices</span><span class="tsw"></span></div>
+        <div class="toggle-row active" onclick="tog(this,'markers')"><span><span class="dot" style="background:var(--r)"></span>Building Markers</span><div class="tsw"></div></div>
+        <div class="toggle-row active" onclick="tog(this,'heat')"><span><span class="dot" style="background:var(--a)"></span>Heatmap</span><div class="tsw"></div></div>
+        <div class="toggle-row active" onclick="tog(this,'rent')"><span><span class="dot" style="background:#3b82f6"></span>Rent Prices</span><div class="tsw"></div></div>
       </div>
-      <div id="loadArea"><div class="load-status" id="loadSt">Fetching data...</div><div class="load-bar"><div class="load-fill" id="loadFi"></div></div></div>
+      <div class="load-status" id="loadSt">Loading...</div>
+      <div class="load-bar" id="loadArea"><div class="load-fill" id="loadFi"></div></div>
     </div>
-    <div class="ll-section">
-      <div class="panel-sub" style="padding:8px 12px 4px">Top 50 Worst Landlords</div>
-      <div class="ll-search-wrap"><input class="ll-search" id="llSearch" placeholder="Filter landlords..." autocomplete="off"></div>
-      <div class="ll-list" id="llList"><div style="padding:12px;font-size:10px;color:var(--text3)">Loading landlord rankings...</div></div>
+    <div style="padding:0">
+      <div style="padding:8px 12px 0"><div class="panel-sub">2025 Public Advocate Watchlist</div></div>
+      <div style="padding:0 12px"><input type="text" id="llSearch" placeholder="Filter landlords..."></div>
+      <div id="llList"></div>
     </div>
   </div>
 </div>
-<div class="info-panel" id="ip">
-  <button class="info-close" onclick="document.getElementById('ip').classList.remove('visible')">✕</button>
-  <div class="info-head"><h3 id="iT">—</h3><div class="info-addr" id="iA">—</div><div class="info-owner" id="iO">Loading owner...</div><div class="info-stats" id="iS"></div></div>
-  <div class="complaint-list" id="iL"><div class="complaint-list-header">Violations</div></div>
+<div id="ip">
+  <button class="info-close" onclick="document.getElementById('ip').classList.remove('visible');highlightLayer.clearLayers()">✕</button>
+  <div class="info-head"><h3 id="iT">—</h3><div class="info-addr" id="iA">—</div><div id="iO">—</div><div id="iS"></div></div>
+  <div id="iL"></div>
 </div>
-<div class="source-badge">Live: <a href="https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5" target="_blank">HPD Violations</a> · <a href="https://data.cityofnewyork.us/Housing-Development/Registration-Contacts/feu5-w2e2" target="_blank">HPD Contacts</a> · <a href="https://www.civicreset.org" target="_blank">CivicReset.org</a></div>
 <script>
+// ============================================================
+// ALL DATA BELOW IS FROM THE OFFICIAL 2025 WORST LANDLORD WATCHLIST
+// Source: landlordwatchlist.com (NYC Public Advocate Jumaane D. Williams)
+// Zero fabricated data. Every name, address, violation count, unit count,
+// DOB violation count, eviction count, tax lien, and corporation name
+// comes directly from the official watchlist website.
+// ============================================================
 const API='https://data.cityofnewyork.us/resource/';
-const VIO_ID='wvxf-dwi5',CONTACT_ID='feu5-w2e2';
-let bldgs={},ownerCache={},heatPts=[],landlordIndex=[];
+const VIO_ID='wvxf-dwi5';
+let markers={},heatPts=[];
 let highlightLayer=L.layerGroup();
+const NYC_TOTAL=870000; // HPD Commissioner testimony March 2026
 
-// ========================
-// BAKED-IN: 2025 Worst Landlord Watchlist (NYC Public Advocate)
-// These appear immediately in the list, no API lookup needed
-// ========================
-const WATCHLIST=[
-{rank:1,name:"Margaret Brunn",company:"A&E Real Estate",violations:4872,buildings:24,locs:[
-  {addr:"80 Woodruff Ave",boro:"BROOKLYN",zip:"11225",lat:40.6583,lng:-73.9618,v:387},
-  {addr:"35-64 84th St",boro:"QUEENS",zip:"11372",lat:40.7530,lng:-73.8850,v:312},
-  {addr:"2124 Caton Ave",boro:"BROOKLYN",zip:"11226",lat:40.6382,lng:-73.9636,v:280},
-  {addr:"1600 Carroll St",boro:"BROOKLYN",zip:"11213",lat:40.6625,lng:-73.9310,v:256},
-  {addr:"285 Winthrop St",boro:"BROOKLYN",zip:"11225",lat:40.6556,lng:-73.9534,v:241},
-  {addr:"890 Prospect Pl",boro:"BROOKLYN",zip:"11216",lat:40.6744,lng:-73.9382,v:235},
-  {addr:"1565 Flatbush Ave",boro:"BROOKLYN",zip:"11210",lat:40.6329,lng:-73.9476,v:218},
-  {addr:"3041 Brighton 6th St",boro:"BROOKLYN",zip:"11235",lat:40.5785,lng:-73.9603,v:195},
-  {addr:"2501 Pitkin Ave",boro:"BROOKLYN",zip:"11208",lat:40.6663,lng:-73.8916,v:189},
-  {addr:"1025 Rogers Ave",boro:"BROOKLYN",zip:"11226",lat:40.6510,lng:-73.9531,v:176}]},
-{rank:2,name:"Donald Hastings",company:"A&E Real Estate",violations:3889,buildings:36,locs:[
-  {addr:"91-10 34th Ave",boro:"QUEENS",zip:"11372",lat:40.7568,lng:-73.8726,v:245},
-  {addr:"600 W 178th St",boro:"MANHATTAN",zip:"10033",lat:40.8491,lng:-73.9377,v:221},
-  {addr:"1677 E 14th St",boro:"BROOKLYN",zip:"11229",lat:40.6267,lng:-73.9594,v:198},
-  {addr:"2750 Olinville Ave",boro:"BRONX",zip:"10467",lat:40.8688,lng:-73.8667,v:185},
-  {addr:"1551 E 19th St",boro:"BROOKLYN",zip:"11230",lat:40.6296,lng:-73.9545,v:172},
-  {addr:"215-11 Jamaica Ave",boro:"QUEENS",zip:"11428",lat:40.7104,lng:-73.7367,v:168},
-  {addr:"42-50 Colden St",boro:"QUEENS",zip:"11355",lat:40.7580,lng:-73.8273,v:156},
-  {addr:"1440 Grand Concourse",boro:"BRONX",zip:"10457",lat:40.8365,lng:-73.9178,v:148},
-  {addr:"355 E 194th St",boro:"BRONX",zip:"10458",lat:40.8627,lng:-73.8894,v:142}]},
-{rank:3,name:"Barry Singer",company:"",violations:2885,buildings:15,locs:[
-  {addr:"1020 Grand Concourse",boro:"BRONX",zip:"10451",lat:40.8288,lng:-73.9224,v:325},
-  {addr:"1515 Macombs Rd",boro:"BRONX",zip:"10452",lat:40.8431,lng:-73.9248,v:298},
-  {addr:"1755 Grand Concourse",boro:"BRONX",zip:"10453",lat:40.8432,lng:-73.9153,v:276},
-  {addr:"2300 Davidson Ave",boro:"BRONX",zip:"10468",lat:40.8589,lng:-73.9077,v:245},
-  {addr:"1285 Sheridan Ave",boro:"BRONX",zip:"10456",lat:40.8357,lng:-73.9151,v:231}]},
-{rank:4,name:"Joseph Cafiero",company:"CREMAC Asset Mgmt",violations:2871,buildings:19,locs:[
-  {addr:"1530 Plimpton Ave",boro:"BRONX",zip:"10452",lat:40.8397,lng:-73.9254,v:289},
-  {addr:"265 E 188th St",boro:"BRONX",zip:"10458",lat:40.8571,lng:-73.8939,v:256},
-  {addr:"2156 Cruger Ave",boro:"BRONX",zip:"10462",lat:40.8590,lng:-73.8730,v:234},
-  {addr:"654 E 227th St",boro:"BRONX",zip:"10466",lat:40.8830,lng:-73.8581,v:212},
-  {addr:"320 E 165th St",boro:"BRONX",zip:"10456",lat:40.8283,lng:-73.9178,v:198}]},
-{rank:5,name:"Peter Fine",company:"",violations:2206,buildings:7,locs:[
-  {addr:"300 W 145th St",boro:"MANHATTAN",zip:"10039",lat:40.8236,lng:-73.9425,v:445},
-  {addr:"515 W 156th St",boro:"MANHATTAN",zip:"10032",lat:40.8338,lng:-73.9400,v:398},
-  {addr:"655 W 171st St",boro:"MANHATTAN",zip:"10032",lat:40.8424,lng:-73.9406,v:356},
-  {addr:"600 W 163rd St",boro:"MANHATTAN",zip:"10032",lat:40.8388,lng:-73.9398,v:312}]},
-{rank:6,name:"Robyn Lucas",company:"",violations:2101,buildings:14,locs:[
-  {addr:"980 Tinton Ave",boro:"BRONX",zip:"10456",lat:40.8219,lng:-73.9007,v:268},
-  {addr:"560 Fox St",boro:"BRONX",zip:"10455",lat:40.8175,lng:-73.8972,v:241},
-  {addr:"1225 Seneca Ave",boro:"BRONX",zip:"10474",lat:40.8308,lng:-73.8796,v:218},
-  {addr:"750 E 152nd St",boro:"BRONX",zip:"10455",lat:40.8196,lng:-73.9089,v:195}]},
-{rank:7,name:"Yonatan Bahumi",company:"",violations:1801,buildings:34,locs:[
-  {addr:"44-15 Barnett Ave",boro:"QUEENS",zip:"11104",lat:40.7522,lng:-73.9138,v:145},
-  {addr:"95-25 63rd Dr",boro:"QUEENS",zip:"11374",lat:40.7278,lng:-73.8486,v:128},
-  {addr:"35-40 30th St",boro:"QUEENS",zip:"11106",lat:40.7555,lng:-73.9230,v:121}]},
-{rank:8,name:"Claudette Henry",company:"",violations:1738,buildings:25,locs:[
-  {addr:"1120 Fulton St",boro:"BROOKLYN",zip:"11238",lat:40.6834,lng:-73.9590,v:178},
-  {addr:"840 Halsey St",boro:"BROOKLYN",zip:"11233",lat:40.6844,lng:-73.9285,v:162},
-  {addr:"525 Bainbridge St",boro:"BROOKLYN",zip:"11233",lat:40.6797,lng:-73.9254,v:148}]},
-{rank:9,name:"Jason Green",company:"",violations:1625,buildings:12,locs:[
-  {addr:"145 E 116th St",boro:"MANHATTAN",zip:"10029",lat:40.7984,lng:-73.9415,v:265},
-  {addr:"2280 8th Ave",boro:"MANHATTAN",zip:"10027",lat:40.8158,lng:-73.9464,v:228}]},
-{rank:10,name:"David Tennenbaum",company:"Summit Properties",violations:1549,buildings:14,locs:[
-  {addr:"900 St Nicholas Ave",boro:"MANHATTAN",zip:"10032",lat:40.8282,lng:-73.9433,v:245},
-  {addr:"601 W 137th St",boro:"MANHATTAN",zip:"10031",lat:40.8208,lng:-73.9516,v:215},
-  {addr:"330 Wadsworth Ave",boro:"MANHATTAN",zip:"10033",lat:40.8476,lng:-73.9347,v:198},
-  {addr:"3780 Broadway",boro:"MANHATTAN",zip:"10032",lat:40.8432,lng:-73.9401,v:178}]},
-{rank:11,name:"Morris Gad",company:"",violations:1487,buildings:9,locs:[{addr:"165 Prospect Park SW",boro:"BROOKLYN",zip:"11218",lat:40.6567,lng:-73.9785,v:245},{addr:"420 Ocean Ave",boro:"BROOKLYN",zip:"11226",lat:40.6570,lng:-73.9620,v:198}]},
-{rank:12,name:"Ephraim Fruchthandler",company:"",violations:1423,buildings:11,locs:[{addr:"1820 Ocean Ave",boro:"BROOKLYN",zip:"11230",lat:40.6156,lng:-73.9543,v:218}]},
-{rank:13,name:"Mark Silber",company:"",violations:1356,buildings:8,locs:[{addr:"2055 Walton Ave",boro:"BRONX",zip:"10453",lat:40.8535,lng:-73.9125,v:278}]},
-{rank:14,name:"Gerald Resnick",company:"",violations:1298,buildings:10,locs:[{addr:"3600 Broadway",boro:"MANHATTAN",zip:"10031",lat:40.8392,lng:-73.9388,v:212}]},
-{rank:15,name:"Shaya Boymelgreen",company:"",violations:1245,buildings:6,locs:[{addr:"131 Pierrepont St",boro:"BROOKLYN",zip:"11201",lat:40.6942,lng:-73.9922,v:298}]},
-{rank:16,name:"Isaac Kassirer",company:"",violations:1189,buildings:8,locs:[{addr:"2880 W 8th St",boro:"BROOKLYN",zip:"11224",lat:40.5747,lng:-73.9785,v:245}]},
-{rank:17,name:"Joseph Brunner",company:"",violations:1145,buildings:7,locs:[{addr:"320 E 3rd St",boro:"MANHATTAN",zip:"10009",lat:40.7234,lng:-73.9847,v:278}]},
-{rank:18,name:"Aaron Jungreis",company:"",violations:1098,buildings:9,locs:[{addr:"1640 Flatbush Ave",boro:"BROOKLYN",zip:"11210",lat:40.6295,lng:-73.9470,v:198}]},
-{rank:19,name:"Abraham Hakim",company:"",violations:1076,buildings:6,locs:[{addr:"508 W 112th St",boro:"MANHATTAN",zip:"10025",lat:40.8050,lng:-73.9626,v:265}]},
-{rank:20,name:"Samuel Herskowitz",company:"",violations:1034,buildings:11,locs:[{addr:"1445 E 14th St",boro:"BROOKLYN",zip:"11230",lat:40.6251,lng:-73.9601,v:165}]},
-{rank:21,name:"Nathan Katz",company:"",violations:998,buildings:5,locs:[{addr:"1270 Shakespeare Ave",boro:"BRONX",zip:"10452",lat:40.8348,lng:-73.9172,v:298}]},
-{rank:22,name:"Moshe Piller",company:"",violations:967,buildings:8,locs:[{addr:"960 E 174th St",boro:"BRONX",zip:"10460",lat:40.8413,lng:-73.8857,v:198}]},
-{rank:23,name:"Joel Goldman",company:"",violations:945,buildings:7,locs:[{addr:"440 Herkimer St",boro:"BROOKLYN",zip:"11213",lat:40.6811,lng:-73.9284,v:218}]},
-{rank:24,name:"Eli Verschleiser",company:"",violations:912,buildings:6,locs:[{addr:"1420 Seabury Pl",boro:"BRONX",zip:"10459",lat:40.8345,lng:-73.8998,v:245}]},
-{rank:25,name:"Joseph Tabak",company:"",violations:878,buildings:9,locs:[{addr:"95-40 Sutphin Blvd",boro:"QUEENS",zip:"11435",lat:40.7056,lng:-73.7974,v:165}]},
+const W=[
+{r:1,n:"Margaret Brunn",co:"A&E Real Estate Holdings",v:4872,b:24,bldgs:[
+{a:"41-25 CASE STREET",bo:"QUEENS",z:"11373",u:109,hpd:331,dob:1,ev:7,tl:4,corp:"41-25 CASE STREET, LLC"},
+{a:"80 WOODRUFF AVENUE",bo:"BROOKLYN",z:"11226",u:42,hpd:308,dob:1,ev:3,tl:4,corp:"80 WOODRUFF AVENUE, LLC"},
+{a:"37-25 81 STREET",bo:"QUEENS",z:"11372",u:59,hpd:306,dob:0,ev:0,tl:4,corp:"37-25 81ST STREET, LLC"},
+{a:"80-01 37 AVENUE",bo:"QUEENS",z:"11372",u:88,hpd:288,dob:0,ev:0,tl:4,corp:"80-01 37TH AVENUE, LLC"},
+{a:"41-40 DENMAN STREET",bo:"QUEENS",z:"11373",u:120,hpd:272,dob:1,ev:12,tl:4,corp:"41-40 DENMAN STREET VENTURES, LLC"},
+{a:"43-08 40 STREET",bo:"QUEENS",z:"11104",u:71,hpd:255,dob:0,ev:0,tl:4,corp:"43-08 40TH STREET, LLC"},
+{a:"94-02 35 AVENUE",bo:"QUEENS",z:"11372",u:72,hpd:249,dob:0,ev:0,tl:4,corp:"94TH & 95TH STREET JH, LLC"},
+{a:"37-33 COLLEGE POINT BOULEVARD",bo:"QUEENS",z:"11354",u:61,hpd:243,dob:1,ev:0,tl:0,corp:"37-33 CP BOULEVARD, LLC"},
+{a:"99-65 64 ROAD",bo:"QUEENS",z:"11374",u:66,hpd:232,dob:0,ev:0,tl:0,corp:"REGO PARK VENTURES, LLC"},
+{a:"37-37 88 STREET",bo:"QUEENS",z:"11372",u:60,hpd:221,dob:0,ev:0,tl:4,corp:"37-37 88TH STREET, LLC"},
+{a:"230 OCEAN PARKWAY",bo:"BROOKLYN",z:"11218",u:60,hpd:221,dob:1,ev:1,tl:4,corp:"230 OCEAN PARKWAY, LLC"},
+{a:"43-23 40 STREET",bo:"QUEENS",z:"11104",u:73,hpd:212,dob:0,ev:0,tl:4,corp:"43-23 40TH STREET, LLC"},
+{a:"35-08 95 STREET",bo:"QUEENS",z:"11372",u:72,hpd:193,dob:0,ev:0,tl:0,corp:"94TH & 95TH STREET JH, LLC"},
+{a:"37-06 81 STREET",bo:"QUEENS",z:"11372",u:39,hpd:177,dob:0,ev:0,tl:4,corp:"37-06 81ST STREET, LLC"},
+{a:"388 AVENUE X",bo:"BROOKLYN",z:"11223",u:73,hpd:174,dob:0,ev:8,tl:4,corp:"388 AVENUE X LLC"},
+{a:"119-21 METROPOLITAN AVENUE",bo:"QUEENS",z:"11415",u:60,hpd:170,dob:4,ev:2,tl:0,corp:"119-21 METROPOLITAN AVENUE HOLDINGS, LLC"},
+{a:"102-43 CORONA AVENUE",bo:"QUEENS",z:"11368",u:41,hpd:170,dob:0,ev:0,tl:4,corp:"102-43 CORONA AVENUE, LLC"},
+{a:"86-01 37 AVENUE",bo:"QUEENS",z:"11372",u:47,hpd:163,dob:0,ev:0,tl:0,corp:"35-65 86TH STREET, LLC"},
+{a:"37-30 81 STREET",bo:"QUEENS",z:"11372",u:32,hpd:134,dob:0,ev:0,tl:0,corp:"37-30 81ST STREET, LLC"},
+{a:"83-02 34 AVENUE",bo:"QUEENS",z:"11372",u:40,hpd:126,dob:0,ev:0,tl:0,corp:"34-09 83RD STREET, LLC"},
+{a:"32-50 93 STREET",bo:"QUEENS",z:"11369",u:39,hpd:118,dob:0,ev:0,tl:4,corp:"32-40 AND 32-50 93RD STREET, LLC"},
+{a:"34-19 90 STREET",bo:"QUEENS",z:"11372",u:54,hpd:105,dob:0,ev:0,tl:4,corp:"LA MESA VERDE APARTMENTS, LLC"},
+{a:"65 OCEAN AVENUE",bo:"BROOKLYN",z:"11225",u:41,hpd:103,dob:0,ev:2,tl:4,corp:"57-65 OCEAN AVENUE, LLC"},
+{a:"48-16 46 STREET",bo:"QUEENS",z:"11377",u:20,hpd:101,dob:0,ev:0,tl:4,corp:"48-16 46TH STREET, LLC"}]},
+{r:2,n:"Donald Hastings",co:"A&E Real Estate Holdings",v:3889,b:36,bldgs:[
+{a:"34-15 PARSONS BOULEVARD",bo:"QUEENS",z:"11354",u:175,hpd:548,dob:3,ev:0,tl:0,corp:"34-15 PARSONS BLVD, LLC"},
+{a:"2 ELLWOOD STREET",bo:"MANHATTAN",z:"10040",u:150,hpd:415,dob:2,ev:4,tl:0,corp:"2 ELLWOOD STREET, LLC"},
+{a:"342 FT WASHINGTON AVENUE",bo:"MANHATTAN",z:"10033",u:48,hpd:239,dob:0,ev:0,tl:0,corp:"344 FORT WASHINGTON AVENUE, LLC"},
+{a:"370 FT WASHINGTON AVENUE",bo:"MANHATTAN",z:"10033",u:75,hpd:215,dob:0,ev:0,tl:0,corp:"370 FORT WASHINGTON AVENUE LLC"},
+{a:"147-08 72 ROAD",bo:"QUEENS",z:"11367",u:12,hpd:176,dob:0,ev:0,tl:4,corp:"KEW GARDENS HILLS, LLC"},
+{a:"150-45 73 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:152,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"350 FT WASHINGTON AVENUE",bo:"MANHATTAN",z:"10033",u:43,hpd:142,dob:0,ev:0,tl:0,corp:"350 FORT WASHINGTON AVENUE, LLC"},
+{a:"150-40 73 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:141,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"503 WEST 122 STREET",bo:"MANHATTAN",z:"10027",u:18,hpd:127,dob:0,ev:0,tl:0,corp:"122ND STREET INVESTOR, LLC"},
+{a:"75-06 153 STREET",bo:"QUEENS",z:"11367",u:12,hpd:124,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"150-41 73 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:109,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"150-42 75 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:100,dob:1,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"147-51 72 ROAD",bo:"QUEENS",z:"11367",u:12,hpd:97,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"72-45 153 STREET",bo:"QUEENS",z:"11367",u:12,hpd:87,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"147-39 73 AVENUE",bo:"QUEENS",z:"11367",u:11,hpd:87,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"75-10 KISSENA BOULEVARD",bo:"QUEENS",z:"11367",u:12,hpd:74,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"150-41 75 ROAD",bo:"QUEENS",z:"11367",u:12,hpd:74,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"147-07 72 ROAD",bo:"QUEENS",z:"11367",u:12,hpd:74,dob:0,ev:0,tl:4,corp:"KEW GARDENS HILLS LLC"},
+{a:"72-49 153 STREET",bo:"QUEENS",z:"11367",u:12,hpd:71,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"153-28 75 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:68,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"147-53 72 DRIVE",bo:"QUEENS",z:"11367",u:12,hpd:68,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"73-11 153 STREET",bo:"QUEENS",z:"11367",u:12,hpd:62,dob:0,ev:1,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"72-30 KISSENA BOULEVARD",bo:"QUEENS",z:"11367",u:12,hpd:54,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"150-43 72 DRIVE",bo:"QUEENS",z:"11367",u:12,hpd:54,dob:1,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"153-50 75 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:51,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"73-12 153 STREET",bo:"QUEENS",z:"11367",u:12,hpd:51,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"153-32 73 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:49,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"153-10 75 AVENUE",bo:"QUEENS",z:"11367",u:12,hpd:46,dob:0,ev:1,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"73-05 150 STREET",bo:"QUEENS",z:"11367",u:12,hpd:46,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"150-46 72 DRIVE",bo:"QUEENS",z:"11367",u:12,hpd:46,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"72-22 153 STREET",bo:"QUEENS",z:"11367",u:12,hpd:44,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS,LLC"},
+{a:"150-42 72 DRIVE",bo:"QUEENS",z:"11367",u:12,hpd:44,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"530 WEST 123 STREET",bo:"MANHATTAN",z:"10027",u:11,hpd:42,dob:0,ev:0,tl:0,corp:"123RD STREET INVESTOR, LLC"},
+{a:"147-27 72 ROAD",bo:"QUEENS",z:"11367",u:12,hpd:40,dob:1,ev:0,tl:0,corp:"KEW GARDENS HILLS LLC"},
+{a:"147-48 72 ROAD",bo:"QUEENS",z:"11367",u:12,hpd:37,dob:0,ev:0,tl:0,corp:"KEW GARDENS HILLS, LLC"},
+{a:"522 WEST 123 STREET",bo:"MANHATTAN",z:"10027",u:10,hpd:35,dob:0,ev:0,tl:0,corp:"123RD STREET INVESTOR, LLC"}]},
+{r:3,n:"Barry Singer",co:"",v:2885,b:15,bldgs:[
+{a:"509 HINSDALE STREET",bo:"BROOKLYN",z:"11207",u:21,hpd:372,dob:3,ev:0,tl:4,corp:"RIVERDALE AVENUE PROPERTIES LLC"},
+{a:"620 EAST 178 STREET",bo:"BRONX",z:"10457",u:47,hpd:357,dob:3,ev:0,tl:0,corp:"620 EAST 178 LLC"},
+{a:"2497 GRAND AVENUE",bo:"BRONX",z:"10468",u:37,hpd:326,dob:3,ev:6,tl:0,corp:"MGSAVIII LLC"},
+{a:"3021 HEATH AVENUE",bo:"BRONX",z:"10463",u:26,hpd:243,dob:0,ev:0,tl:0,corp:"MGSA III LLC"},
+{a:"3004 HEATH AVENUE",bo:"BRONX",z:"10463",u:36,hpd:240,dob:1,ev:9,tl:4,corp:"MGSA II LLC"},
+{a:"3030 HEATH AVENUE",bo:"BRONX",z:"10463",u:27,hpd:223,dob:10,ev:2,tl:0,corp:"MGSA IV LLC"},
+{a:"2487 GRAND AVENUE",bo:"BRONX",z:"10468",u:42,hpd:220,dob:5,ev:8,tl:4,corp:"MGSA VII LLC"},
+{a:"510 RIVERDALE AVENUE",bo:"BROOKLYN",z:"11207",u:22,hpd:207,dob:2,ev:5,tl:0,corp:"RIVERDALE AVENUE PROPERTIES LLC"},
+{a:"2500 WEBB AVENUE",bo:"BRONX",z:"10468",u:58,hpd:177,dob:5,ev:9,tl:4,corp:"2500 WEBB LLC"},
+{a:"160 WEST KINGSBRIDGE ROAD",bo:"BRONX",z:"10463",u:37,hpd:167,dob:9,ev:1,tl:0,corp:"MGSA I LLC"},
+{a:"3011 HEATH AVENUE",bo:"BRONX",z:"10463",u:30,hpd:141,dob:3,ev:2,tl:0,corp:"MGSA III LLC"},
+{a:"265 EAST 181 STREET",bo:"BRONX",z:"10457",u:25,hpd:131,dob:0,ev:0,tl:0,corp:"265 EAST 181ST LLC"},
+{a:"2542A WHITE PLAINS ROAD",bo:"BRONX",z:"10467",u:6,hpd:31,dob:0,ev:0,tl:0,corp:"WP ROAD LLC"},
+{a:"2546A WHITE PLAINS ROAD",bo:"BRONX",z:"10467",u:6,hpd:25,dob:0,ev:0,tl:0,corp:"WP ROAD LLC"},
+{a:"2548A WHITE PLAINS ROAD",bo:"BRONX",z:"10467",u:6,hpd:25,dob:0,ev:0,tl:0,corp:"WP ROAD LLC"}]},
+{r:4,n:"Joseph Cafiero",co:"CREMAC Asset Mgmt",v:2871,b:19,bldgs:[
+{a:"1202 SPOFFORD AVENUE",bo:"BRONX",z:"10474",u:60,hpd:501,dob:6,ev:6,tl:0,corp:"Bronx 1202 Spoford Ave L.P."},
+{a:"846 PROSPECT PLACE",bo:"BROOKLYN",z:"11216",u:20,hpd:348,dob:2,ev:0,tl:4,corp:"ZB Prospect Realty LLC"},
+{a:"441 EAST 187 STREET",bo:"BRONX",z:"10458",u:18,hpd:339,dob:2,ev:0,tl:4,corp:"Bronx 441 East 187 ST L.P."},
+{a:"2120 TIEBOUT AVENUE",bo:"BRONX",z:"10457",u:76,hpd:184,dob:1,ev:12,tl:0,corp:"2120 Tiebout LLC"},
+{a:"546 EAST 182 STREET",bo:"BRONX",z:"10457",u:25,hpd:163,dob:0,ev:3,tl:0,corp:"Joeffi LLC"},
+{a:"226 WEST TREMONT AVENUE",bo:"BRONX",z:"10453",u:49,hpd:160,dob:3,ev:1,tl:0,corp:"CAP 226 Tremont Ave Property Owner LLC"},
+{a:"1631 GRAND AVENUE",bo:"BRONX",z:"10453",u:42,hpd:131,dob:1,ev:1,tl:0,corp:"CAP 1631 Grand Ave Property Owner LLC"},
+{a:"444 EAST 187 STREET",bo:"BRONX",z:"10458",u:28,hpd:121,dob:4,ev:0,tl:0,corp:"Bronx 444 East 187 ST L.P."},
+{a:"741 HUNTS POINT AVENUE",bo:"BRONX",z:"10474",u:56,hpd:119,dob:6,ev:0,tl:4,corp:"Bronx 741-743 Hunts Point Avenue L.P."},
+{a:"503 WEST 169 STREET",bo:"MANHATTAN",z:"10032",u:24,hpd:118,dob:1,ev:0,tl:0,corp:"503 W 169 LLC"},
+{a:"378 EAST 139 STREET",bo:"BRONX",z:"10454",u:10,hpd:112,dob:0,ev:0,tl:0,corp:"GMC Holding Owners LLC"},
+{a:"452 WEST 164 STREET",bo:"MANHATTAN",z:"10032",u:20,hpd:95,dob:0,ev:0,tl:0,corp:"452 W 164 Realty LLC"},
+{a:"1786 TOPPING AVENUE",bo:"BRONX",z:"10457",u:43,hpd:95,dob:1,ev:2,tl:0,corp:"CAP 1786 Topping Ave Owner LLC"},
+{a:"66 EAST 190 STREET",bo:"BRONX",z:"10468",u:20,hpd:91,dob:0,ev:0,tl:0,corp:"66 & 72 E 190 LLC"},
+{a:"380 EAST 139 STREET",bo:"BRONX",z:"10454",u:10,hpd:80,dob:0,ev:0,tl:0,corp:"GMC Holding Owners LLC"},
+{a:"72 EAST 190 STREET",bo:"BRONX",z:"10468",u:20,hpd:78,dob:0,ev:0,tl:0,corp:"66 & 72 E 190 LLC"},
+{a:"624 EAST 169 STREET",bo:"BRONX",z:"10456",u:21,hpd:74,dob:0,ev:0,tl:0,corp:"622 E 169 LLC"},
+{a:"1738 EAST 4 STREET",bo:"BROOKLYN",z:"11223",u:6,hpd:34,dob:0,ev:0,tl:0,corp:"1738 East 4th Street LLC"},
+{a:"867 KNICKERBOCKER AVENUE",bo:"BROOKLYN",z:"11207",u:6,hpd:28,dob:0,ev:2,tl:0,corp:"MF Blue Valley Apartments, LLC"}]},
+{r:5,n:"Peter Fine",co:"",v:2206,b:7,bldgs:[
+{a:"270 EAST BURNSIDE AVENUE",bo:"BRONX",z:"10457",u:114,hpd:535,dob:0,ev:15,tl:0,corp:"EAST BURNSIDE AVE ASSOC LP"},
+{a:"951 HOE AVENUE",bo:"BRONX",z:"10459",u:164,hpd:436,dob:0,ev:29,tl:0,corp:"ALDUS STREET ASSOC LP"},
+{a:"600 CONCORD AVENUE",bo:"BRONX",z:"10455",u:83,hpd:329,dob:0,ev:14,tl:0,corp:"CONCORD AVE ASSOC LP"},
+{a:"4646 PARK AVENUE",bo:"BRONX",z:"10458",u:70,hpd:260,dob:1,ev:13,tl:0,corp:"PARK AVE ASSOC LP"},
+{a:"1314 MERRIAM AVENUE",bo:"BRONX",z:"10452",u:98,hpd:231,dob:4,ev:13,tl:0,corp:"MERRIAM AVE ASSOCIATES LP"},
+{a:"1491 MACOMBS ROAD",bo:"BRONX",z:"10452",u:90,hpd:217,dob:0,ev:8,tl:0,corp:"MACOMBS RD ASSOCIATES LP"},
+{a:"1240 WASHINGTON AVENUE",bo:"BRONX",z:"10456",u:100,hpd:198,dob:0,ev:0,tl:0,corp:"1240 WASHINGTON AVE. ACCOC. LP"}]},
+{r:6,n:"Robyn Lucas",co:"",v:2101,b:14,bldgs:[
+{a:"1593 FULTON STREET",bo:"BROOKLYN",z:"11213",u:248,hpd:679,dob:1,ev:0,tl:0,corp:"RISLEY DENT TOWERS ASSOCIATES, LP"},
+{a:"281 QUINCY STREET",bo:"BROOKLYN",z:"11216",u:25,hpd:256,dob:0,ev:1,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"425 GATES AVENUE",bo:"BROOKLYN",z:"11216",u:11,hpd:252,dob:0,ev:3,tl:4,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"80 EAST 93 STREET",bo:"BROOKLYN",z:"11212",u:102,hpd:248,dob:2,ev:0,tl:0,corp:"EAST 93 STREET ASSOCIATES, LP"},
+{a:"60 EAST 93 STREET",bo:"BROOKLYN",z:"11212",u:34,hpd:163,dob:2,ev:0,tl:0,corp:"EAST 93 STREET ASSOCIATES, LP"},
+{a:"142-44 MADISON STREET",bo:"BROOKLYN",z:"11216",u:16,hpd:104,dob:0,ev:0,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"426 GATES AVENUE",bo:"BROOKLYN",z:"11216",u:3,hpd:74,dob:0,ev:0,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"142 MONROE STREET",bo:"BROOKLYN",z:"11216",u:8,hpd:69,dob:0,ev:2,tl:4,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"180 QUINCY STREET",bo:"BROOKLYN",z:"11216",u:16,hpd:64,dob:0,ev:3,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"529A GATES AVENUE",bo:"BROOKLYN",z:"11216",u:4,hpd:50,dob:0,ev:0,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"340 GATES AVENUE",bo:"BROOKLYN",z:"11216",u:8,hpd:39,dob:0,ev:0,tl:0,corp:"GATES CLUSTER DEVELOPEMENT, LP"},
+{a:"273 MONROE STREET",bo:"BROOKLYN",z:"11216",u:6,hpd:39,dob:0,ev:1,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"373 NOSTRAND AVENUE",bo:"BROOKLYN",z:"11216",u:4,hpd:37,dob:0,ev:0,tl:2,corp:"GATES CLUSTER DEVELOPMENT, LP"},
+{a:"531 GATES AVENUE",bo:"BROOKLYN",z:"11216",u:4,hpd:27,dob:2,ev:0,tl:0,corp:"GATES CLUSTER DEVELOPMENT, LP"}]},
+{r:7,n:"Yonatan Bahumi",co:"",v:1801,b:34,bldgs:[
+{a:"1986 BELMONT AVENUE",bo:"BRONX",z:"10457",u:3,hpd:149,dob:0,ev:0,tl:4,corp:"ARS BRONX LLC"},
+{a:"74 CLINTON PLACE",bo:"BRONX",z:"10453",u:3,hpd:135,dob:0,ev:4,tl:4,corp:"74 CLINTON PLACE LLC"},
+{a:"217 EAST BURNSIDE AVENUE",bo:"BRONX",z:"10457",u:3,hpd:131,dob:0,ev:1,tl:4,corp:"217 E BURNSIDE AVE LLC"},
+{a:"390 EAST 195 STREET",bo:"BRONX",z:"10458",u:3,hpd:115,dob:0,ev:0,tl:4,corp:"390 E 195 ST LLC"},
+{a:"707 EAGLE AVENUE",bo:"BRONX",z:"10455",u:3,hpd:102,dob:0,ev:0,tl:0,corp:"707 EAGLE AVE LLC"},
+{a:"3319 FISH AVENUE",bo:"BRONX",z:"10469",u:3,hpd:85,dob:0,ev:0,tl:4,corp:"3319 FISH AVE LLC"},
+{a:"1432 SHAKESPEARE AVENUE",bo:"BRONX",z:"10452",u:4,hpd:85,dob:0,ev:1,tl:3,corp:"1432 SHAKESPEARE AVENUE LLC"},
+{a:"764 EAST 213 STREET",bo:"BRONX",z:"10467",u:3,hpd:77,dob:0,ev:0,tl:4,corp:"764 E 213TH ST LLC"},
+{a:"460 CONCORD AVENUE",bo:"BRONX",z:"10455",u:3,hpd:66,dob:0,ev:0,tl:0,corp:"460 CONCORD AVE LLC"},
+{a:"1958 CROSS BRONX EXPRESSWAY",bo:"BRONX",z:"10472",u:3,hpd:66,dob:0,ev:1,tl:0,corp:"1958 CROSS BRONX"},
+{a:"1331 INWOOD AVENUE",bo:"BRONX",z:"10452",u:3,hpd:59,dob:0,ev:0,tl:0,corp:"1331 INWOOD AVE LLC"},
+{a:"919 BRUCKNER BOULEVARD",bo:"BRONX",z:"10459",u:3,hpd:53,dob:0,ev:0,tl:0,corp:"919 BRUCKNER BLVD LLC"},
+{a:"1223 UNION AVENUE",bo:"BRONX",z:"10459",u:3,hpd:49,dob:0,ev:0,tl:4,corp:"1223 UNION AVE LLC"},
+{a:"4731 RICHARDSON AVENUE",bo:"BRONX",z:"10470",u:4,hpd:47,dob:0,ev:0,tl:0,corp:"4731 RICHARDSON AVE LLC"},
+{a:"1367 ELLISON AVENUE",bo:"BRONX",z:"10461",u:4,hpd:46,dob:0,ev:0,tl:0,corp:"1367 ELLISON AVE LLC"},
+{a:"875 CAULDWELL AVENUE",bo:"BRONX",z:"10456",u:3,hpd:45,dob:0,ev:2,tl:4,corp:""},
+{a:"830 FAILE STREET",bo:"BRONX",z:"10474",u:4,hpd:43,dob:0,ev:7,tl:0,corp:""},
+{a:"1047 EAST 227 STREET",bo:"BRONX",z:"10466",u:3,hpd:40,dob:0,ev:0,tl:4,corp:"1047 E 227 st llc"},
+{a:"1732 HUNT AVENUE",bo:"BRONX",z:"10462",u:3,hpd:38,dob:1,ev:3,tl:0,corp:"1732 HUNT AVENUE LLC"},
+{a:"711 EAGLE AVENUE",bo:"BRONX",z:"10455",u:3,hpd:38,dob:0,ev:0,tl:4,corp:"711 EAGLE AVE LLC"},
+{a:"1180 EAST 178 STREET",bo:"BRONX",z:"10460",u:3,hpd:36,dob:0,ev:0,tl:4,corp:"1180 E 178th st llc"},
+{a:"1158 WHEELER AVENUE",bo:"BRONX",z:"10472",u:4,hpd:31,dob:0,ev:0,tl:4,corp:"1158 WHEELER AVE LLC"},
+{a:"754 EAST 227 STREET",bo:"BRONX",z:"10466",u:4,hpd:31,dob:0,ev:0,tl:4,corp:"754 EAST 227 ST LLC"},
+{a:"1125 FOREST AVENUE",bo:"BRONX",z:"10456",u:3,hpd:30,dob:0,ev:0,tl:0,corp:"1125 FOREST AVENUE LLC"},
+{a:"3207 WALLACE AVENUE",bo:"BRONX",z:"10467",u:3,hpd:28,dob:0,ev:0,tl:0,corp:"3207 WALLACE AVE LLC"},
+{a:"725 EAGLE AVENUE",bo:"BRONX",z:"10455",u:3,hpd:26,dob:0,ev:0,tl:0,corp:"725 eagle ave llc"},
+{a:"2751 BARNES AVENUE",bo:"BRONX",z:"10467",u:4,hpd:23,dob:0,ev:1,tl:4,corp:"2751 BARNES AVE LLC"},
+{a:"2164 CROTONA AVENUE",bo:"BRONX",z:"10457",u:3,hpd:21,dob:0,ev:1,tl:8,corp:""},
+{a:"1038 EAST 224 STREET",bo:"BRONX",z:"10466",u:3,hpd:20,dob:0,ev:0,tl:0,corp:"1038 E 224th st LLC"},
+{a:"2112 HUGHES AVENUE",bo:"BRONX",z:"10457",u:3,hpd:20,dob:0,ev:0,tl:0,corp:"2112 HUGHES AVE LLC"},
+{a:"31 BUCHANAN PLACE",bo:"BRONX",z:"10453",u:3,hpd:19,dob:0,ev:3,tl:0,corp:"31 BUCHANAN PLACE LLC"},
+{a:"2024 RYER AVENUE",bo:"BRONX",z:"10457",u:3,hpd:18,dob:0,ev:0,tl:0,corp:"2024 RYER AVE LLC"},
+{a:"1178 EAST 221 STREET",bo:"BRONX",z:"10469",u:3,hpd:17,dob:8,ev:0,tl:4,corp:"1178 EAST 221 STREET llc"},
+{a:"3338 FISH AVENUE",bo:"BRONX",z:"10469",u:3,hpd:12,dob:0,ev:1,tl:0,corp:"3338 FISH AVE LLC"}]},
+{r:8,n:"Claudette Henry",co:"",v:1738,b:25,bldgs:[
+{a:"100 PULASKI STREET",bo:"BROOKLYN",z:"11206",u:16,hpd:228,dob:0,ev:1,tl:10,corp:"NEB LP"},
+{a:"1939 PARK PLACE",bo:"BROOKLYN",z:"11233",u:37,hpd:138,dob:3,ev:3,tl:4,corp:"PARK MONROE II LLC"},
+{a:"523 BLAKE AVENUE",bo:"BROOKLYN",z:"11207",u:16,hpd:138,dob:0,ev:3,tl:0,corp:"HT JERICHO LP"},
+{a:"1046 GREENE AVENUE",bo:"BROOKLYN",z:"11221",u:12,hpd:128,dob:0,ev:0,tl:7,corp:"NEB LP"},
+{a:"60 PATCHEN AVENUE",bo:"BROOKLYN",z:"11221",u:8,hpd:124,dob:0,ev:0,tl:8,corp:"NEB LP"},
+{a:"98 PULASKI STREET",bo:"BROOKLYN",z:"11206",u:5,hpd:119,dob:2,ev:1,tl:7,corp:"NEB LP"},
+{a:"450 BRADFORD STREET",bo:"BROOKLYN",z:"11207",u:3,hpd:85,dob:0,ev:0,tl:8,corp:"HT JERICHO LP"},
+{a:"278 MARION STREET",bo:"BROOKLYN",z:"11233",u:7,hpd:83,dob:0,ev:0,tl:9,corp:"CHAUCEY SUMPTER LP"},
+{a:"369 SHEFFIELD AVENUE",bo:"BROOKLYN",z:"11207",u:4,hpd:78,dob:0,ev:0,tl:4,corp:"HT JERICHO, LP"},
+{a:"430 NEW JERSEY AVENUE",bo:"BROOKLYN",z:"11207",u:3,hpd:70,dob:0,ev:0,tl:8,corp:"HT JERICHO LP"},
+{a:"749 LAFAYETTE AVENUE",bo:"BROOKLYN",z:"11221",u:8,hpd:61,dob:0,ev:0,tl:10,corp:"NEB LP"},
+{a:"349 CHAUNCEY STREET",bo:"BROOKLYN",z:"11233",u:5,hpd:58,dob:0,ev:0,tl:4,corp:"CHAUNCEY SUMPTER LP"},
+{a:"948 HEGEMAN AVENUE",bo:"BROOKLYN",z:"11208",u:12,hpd:57,dob:1,ev:0,tl:5,corp:"HT JERICHO LP"},
+{a:"811 CLEVELAND STREET",bo:"BROOKLYN",z:"11208",u:6,hpd:49,dob:0,ev:1,tl:6,corp:"HT JERICHO LP"},
+{a:"491 CHAUNCEY STREET",bo:"BROOKLYN",z:"11233",u:5,hpd:45,dob:0,ev:2,tl:4,corp:"CHAUNCHEY SUMPTER LP"},
+{a:"432 NEW JERSEY AVENUE",bo:"BROOKLYN",z:"11207",u:3,hpd:44,dob:0,ev:0,tl:7,corp:"H T JERICHO"},
+{a:"562 BAINBRIDGE STREET",bo:"BROOKLYN",z:"11233",u:6,hpd:38,dob:0,ev:0,tl:4,corp:"CHAUNCEY SUMPTER LP"},
+{a:"428 NEW JERSEY AVENUE",bo:"BROOKLYN",z:"11207",u:3,hpd:37,dob:0,ev:0,tl:8,corp:"HT JERICHO LP"},
+{a:"456 BRADFORD STREET",bo:"BROOKLYN",z:"11207",u:3,hpd:33,dob:0,ev:0,tl:8,corp:"HT JEICHO"},
+{a:"134 SACKMAN STREET",bo:"BROOKLYN",z:"11233",u:4,hpd:30,dob:1,ev:1,tl:4,corp:""},
+{a:"2413 PITKIN AVENUE",bo:"BROOKLYN",z:"11208",u:5,hpd:30,dob:0,ev:0,tl:16,corp:"HT JERICHO LP"},
+{a:"534 BAINBRIDGE STREET",bo:"BROOKLYN",z:"11233",u:5,hpd:18,dob:0,ev:1,tl:4,corp:"CHAUNCEY SUMPTER LP"},
+{a:"1056 GREENE AVENUE",bo:"BROOKLYN",z:"11221",u:4,hpd:17,dob:2,ev:0,tl:0,corp:"NEB LP"},
+{a:"409 NEW JERSEY AVENUE",bo:"BROOKLYN",z:"11207",u:3,hpd:15,dob:0,ev:0,tl:8,corp:"HT JERICHO LP"},
+{a:"407 NEW JERSEY AVENUE",bo:"BROOKLYN",z:"11207",u:3,hpd:15,dob:0,ev:0,tl:8,corp:"HT JERICHO LP"}]},
+{r:9,n:"Joseph Pistilli",co:"Pistilli Realty Group",v:1656,b:8,bldgs:[
+{a:"1555 GRAND CONCOURSE",bo:"BRONX",z:"10452",u:147,hpd:435,dob:2,ev:15,tl:0,corp:"1555 GRAND CONCOURSE LLC"},
+{a:"65 EAST 175 STREET",bo:"BRONX",z:"10453",u:49,hpd:311,dob:2,ev:0,tl:0,corp:"65 EAST 175TH LLC"},
+{a:"2815 BEVERLY ROAD",bo:"BROOKLYN",z:"11226",u:64,hpd:239,dob:0,ev:1,tl:0,corp:"2815 BEVERLY ROAD LLC"},
+{a:"30-86 32 STREET",bo:"QUEENS",z:"11102",u:40,hpd:178,dob:0,ev:0,tl:0,corp:"30-86 32ND STREET LLC"},
+{a:"1715 WALTON AVENUE",bo:"BRONX",z:"10453",u:46,hpd:172,dob:2,ev:1,tl:0,corp:"PISTILLI WALTON AVENUE LLC"},
+{a:"1727 WALTON AVENUE",bo:"BRONX",z:"10453",u:56,hpd:155,dob:2,ev:4,tl:0,corp:"PISTILLI WALTON AVENUE LLC"},
+{a:"2710 VALENTINE AVENUE",bo:"BRONX",z:"10458",u:37,hpd:122,dob:2,ev:0,tl:0,corp:"2710 VALENTINE AVENUE LLC"},
+{a:"28-07 38 STREET",bo:"QUEENS",z:"11103",u:8,hpd:44,dob:0,ev:0,tl:0,corp:"PITILLI 38TH STREET LLC"}]},
+{r:10,n:"David Tennenbaum",co:"Summit Properties",v:1549,b:14,bldgs:[
+{a:"2961 MARION AVENUE",bo:"BRONX",z:"10458",u:80,hpd:210,dob:0,ev:0,tl:0,corp:"2961-65 M LLC"},
+{a:"776 CROWN STREET",bo:"BROOKLYN",z:"11213",u:46,hpd:202,dob:0,ev:7,tl:0,corp:"776 C LLC"},
+{a:"2390 CRESTON AVENUE",bo:"BRONX",z:"10468",u:20,hpd:169,dob:0,ev:19,tl:0,corp:"2390 C LLC"},
+{a:"1818 CLAY AVENUE",bo:"BRONX",z:"10457",u:24,hpd:134,dob:1,ev:3,tl:0,corp:"1818 CLAY LLC"},
+{a:"518 EAST 138 STREET",bo:"BRONX",z:"10454",u:23,hpd:122,dob:0,ev:0,tl:0,corp:"514-518 E 138 LLC"},
+{a:"643 SOUTHERN BOULEVARD",bo:"BRONX",z:"10455",u:46,hpd:117,dob:0,ev:0,tl:0,corp:"643 SOUTHERN LLC"},
+{a:"17 WEST 125 STREET",bo:"MANHATTAN",z:"10027",u:49,hpd:102,dob:0,ev:2,tl:0,corp:"125 IMPROVEMENT GROUP LLC"},
+{a:"344 EAST 209 STREET",bo:"BRONX",z:"10467",u:32,hpd:98,dob:0,ev:0,tl:0,corp:"344 E 209 LLC"},
+{a:"1025 LONGWOOD AVENUE",bo:"BRONX",z:"10459",u:19,hpd:92,dob:0,ev:0,tl:0,corp:"801 SOUTHERN LLC"},
+{a:"533 EAST 139 STREET",bo:"BRONX",z:"10454",u:21,hpd:85,dob:0,ev:0,tl:0,corp:"533 E 139 LLC"},
+{a:"1529 DAHILL ROAD",bo:"BROOKLYN",z:"11204",u:42,hpd:74,dob:0,ev:4,tl:0,corp:"1529 DAHILL LLC"},
+{a:"514 EAST 138 STREET",bo:"BRONX",z:"10454",u:23,hpd:69,dob:0,ev:0,tl:0,corp:"514-518 138 LLC"},
+{a:"1178 WASHINGTON AVENUE",bo:"BRONX",z:"10456",u:16,hpd:54,dob:0,ev:1,tl:0,corp:"1178 W LLC"},
+{a:"745 EAST 217 STREET",bo:"BRONX",z:"10467",u:7,hpd:21,dob:0,ev:0,tl:0,corp:"741 E 217 LLC"}]},
+{r:11,n:"Ronald Kandov",co:"Phantom Capital",v:1307,b:23,bldgs:[
+{a:"718 GARDEN STREET",bo:"BRONX",z:"10457",u:3,hpd:239,dob:0,ev:0,tl:2,corp:"Phantom Capital 22 LLC"},
+{a:"1357 TELLER AVENUE",bo:"BRONX",z:"10456",u:5,hpd:116,dob:2,ev:2,tl:6,corp:"Phantom Capital Apartments LLC"},
+{a:"1404 CROTONA PARK EAST",bo:"BRONX",z:"10460",u:3,hpd:96,dob:0,ev:0,tl:2,corp:"Phantom Cap 98 LLC"},
+{a:"612 BEECH TERRACE",bo:"BRONX",z:"10454",u:3,hpd:79,dob:0,ev:1,tl:0,corp:"Phantom Guys LLC"},
+{a:"721 EAST 222 STREET",bo:"BRONX",z:"10467",u:5,hpd:76,dob:0,ev:0,tl:0,corp:"PHANTOM CAPITAL ASSOCIATES"},
+{a:"1302 ST LAWRENCE AVENUE",bo:"BRONX",z:"10472",u:3,hpd:73,dob:0,ev:0,tl:0,corp:"Phantom Block Shoppers LLC"},
+{a:"959 EAST 223 STREET",bo:"BRONX",z:"10466",u:3,hpd:68,dob:0,ev:0,tl:9,corp:"PHANTOM CAPITAL MANAGERS LLC"},
+{a:"1150 LONGFELLOW AVENUE",bo:"BRONX",z:"10459",u:3,hpd:62,dob:0,ev:0,tl:4,corp:"PHANTOM CAPITAL APARTMENTS LLC"},
+{a:"826 EAST 214 STREET",bo:"BRONX",z:"10467",u:4,hpd:60,dob:0,ev:0,tl:0,corp:"Phantom Mazal LLC"},
+{a:"1260 STRATFORD AVENUE",bo:"BRONX",z:"10472",u:4,hpd:59,dob:2,ev:0,tl:0,corp:"Phantom Capital BH LLC"},
+{a:"705 CLEVELAND STREET",bo:"BROOKLYN",z:"11208",u:3,hpd:52,dob:0,ev:0,tl:0,corp:"Phantom 101 LLC"},
+{a:"1310 OAKLEY STREET",bo:"BRONX",z:"10469",u:4,hpd:46,dob:0,ev:0,tl:0,corp:"Phantom Cap 251 LLC"},
+{a:"2167 BRUCKNER BOULEVARD",bo:"BRONX",z:"10472",u:3,hpd:39,dob:0,ev:0,tl:0,corp:"Phantom Capital 7 LLC"},
+{a:"4300 BRUNER AVENUE",bo:"BRONX",z:"10466",u:3,hpd:38,dob:0,ev:0,tl:0,corp:"PHANTOM CAP 251 LLC"},
+{a:"633 EAST 236 STREET",bo:"BRONX",z:"10466",u:3,hpd:35,dob:0,ev:0,tl:3,corp:"Phantomize Holdings LLC"},
+{a:"2741 BRONXWOOD AVENUE",bo:"BRONX",z:"10469",u:4,hpd:32,dob:0,ev:0,tl:0,corp:"PHANTOM CAP MH COLLECTION LLC"},
+{a:"1144 LONGFELLOW AVENUE",bo:"BRONX",z:"10459",u:3,hpd:30,dob:0,ev:0,tl:1,corp:"PHANTOM TERRITORY LLC"},
+{a:"1827 TOPPING AVENUE",bo:"BRONX",z:"10457",u:3,hpd:26,dob:0,ev:2,tl:0,corp:"Phantom Block Shoppers LLC"},
+{a:"1235 HOE AVENUE",bo:"BRONX",z:"10459",u:3,hpd:23,dob:0,ev:0,tl:0,corp:"PHANTOM CAPITAL HOLDINGS, LLC"},
+{a:"1080 INTERVALE AVENUE",bo:"BRONX",z:"10459",u:5,hpd:19,dob:0,ev:4,tl:0,corp:"PHANTOM FUND LLC"},
+{a:"960 EAST 223 STREET",bo:"BRONX",z:"10466",u:3,hpd:18,dob:0,ev:0,tl:0,corp:"PHANTOM CAPITAL MANAGERS LLC"},
+{a:"201-09 LINDEN BOULEVARD",bo:"QUEENS",z:"11412",u:3,hpd:11,dob:0,ev:0,tl:0,corp:"Phantom Koach LLC"},
+{a:"1140 FOX STREET",bo:"BRONX",z:"10459",u:3,hpd:10,dob:0,ev:1,tl:0,corp:"Phantom Capital 107 LLC"}]},
+{r:12,n:"Peter Hungerford",co:"",v:1291,b:6,bldgs:[
+{a:"2100 BRONX PARK EAST",bo:"BRONX",z:"10462",u:157,hpd:403,dob:3,ev:2,tl:0,corp:"2100-2110 Bronx Park East Owner LLC"},
+{a:"222 BEDFORD PARK BOULEVARD",bo:"BRONX",z:"10458",u:63,hpd:273,dob:1,ev:2,tl:0,corp:"222 Bedford Park Boulevard Owner LLC"},
+{a:"4305 FURMAN AVENUE",bo:"BRONX",z:"10466",u:43,hpd:198,dob:2,ev:4,tl:0,corp:"4305 Furman Avenue Owner LLC"},
+{a:"76 ST NICHOLAS PLACE",bo:"MANHATTAN",z:"10032",u:31,hpd:171,dob:3,ev:1,tl:0,corp:"76 St Nicholas Place Owner LLC"},
+{a:"3565 BRUCKNER BOULEVARD",bo:"BRONX",z:"10461",u:49,hpd:133,dob:2,ev:4,tl:0,corp:"3565 Bruckner Boulevard Owner LLC"},
+{a:"287 EAST 18 STREET",bo:"BROOKLYN",z:"11226",u:25,hpd:113,dob:0,ev:0,tl:0,corp:"287 East 18th Street Owner LLC"}]},
+{r:13,n:"Eleanor Patrick",co:"",v:1196,b:9,bldgs:[
+{a:"117 WEST 141 STREET",bo:"MANHATTAN",z:"10030",u:49,hpd:258,dob:0,ev:1,tl:2,corp:"117 WEST 141 DE LLC"},
+{a:"10 WEST 182 STREET",bo:"BRONX",z:"10453",u:46,hpd:145,dob:0,ev:1,tl:0,corp:"10 WEST 182 LLC"},
+{a:"127 WEST 141 STREET",bo:"MANHATTAN",z:"10030",u:49,hpd:135,dob:1,ev:0,tl:0,corp:"127 WEST 141 DE LLC"},
+{a:"664 EAST 213 STREET",bo:"BRONX",z:"10467",u:22,hpd:132,dob:0,ev:0,tl:0,corp:"664 EAST 213 LLC"},
+{a:"558 WEST 193 STREET",bo:"MANHATTAN",z:"10040",u:31,hpd:122,dob:0,ev:0,tl:0,corp:"558 WEST 193 LLC"},
+{a:"354 CHAUNCEY STREET",bo:"BROOKLYN",z:"11233",u:16,hpd:121,dob:0,ev:3,tl:0,corp:"354 CHAUNCEY REALTY LLC"},
+{a:"130 GLEN STREET",bo:"BROOKLYN",z:"11208",u:23,hpd:112,dob:0,ev:0,tl:0,corp:"130 GLEN LLC"},
+{a:"649 WEST 184 STREET",bo:"MANHATTAN",z:"10033",u:21,hpd:91,dob:0,ev:0,tl:0,corp:"649 WEST DE LLC"},
+{a:"617 EAST 179 STREET",bo:"BRONX",z:"10457",u:8,hpd:80,dob:0,ev:0,tl:2,corp:"617 EAST 179 LLC"}]},
+{r:14,n:"Alfred Thompson",co:"",v:1141,b:17,bldgs:[
+{a:"1469 BEDFORD AVENUE",bo:"BROOKLYN",z:"11216",u:27,hpd:273,dob:3,ev:0,tl:3,corp:"STUDEBAKER, LP"},
+{a:"1515 ST JOHNS PLACE",bo:"BROOKLYN",z:"11213",u:24,hpd:128,dob:1,ev:0,tl:3,corp:"1515 ST. JOHN'S PLACE"},
+{a:"575 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:103,dob:1,ev:0,tl:4,corp:"FOOD FIRST HDFC,INC"},
+{a:"1374 BOSTON ROAD",bo:"BRONX",z:"10456",u:14,hpd:93,dob:2,ev:1,tl:8,corp:"1374 BOSTON ROAD LP"},
+{a:"411 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:74,dob:0,ev:0,tl:0,corp:"KNOX HOMES L.P"},
+{a:"409 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:62,dob:0,ev:0,tl:0,corp:"KNOX HOMES, LP"},
+{a:"587 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:56,dob:0,ev:0,tl:0,corp:"KNOX HOMES LP"},
+{a:"591 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:6,hpd:53,dob:1,ev:0,tl:0,corp:"KNOX HOMES LP"},
+{a:"585 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:49,dob:0,ev:0,tl:0,corp:"KNOX HOMES LP"},
+{a:"593 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:44,dob:0,ev:0,tl:0,corp:"FOOD FIRST HDFC, INC"},
+{a:"579 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:41,dob:1,ev:0,tl:0,corp:"KNOX HOMES LP"},
+{a:"413 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:40,dob:0,ev:0,tl:0,corp:"KNOX HOMES L.P"},
+{a:"401 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:39,dob:0,ev:1,tl:0,corp:"KNOX HOMES L.P"},
+{a:"581 GRAND AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:24,dob:0,ev:0,tl:0,corp:"KNOX HOMES LP"},
+{a:"405 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:24,dob:0,ev:0,tl:0,corp:"KNOX HOMES LP"},
+{a:"399 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:22,dob:0,ev:0,tl:6,corp:"FOOD FIRST HDFC, INC"},
+{a:"403 ST MARKS AVENUE",bo:"BROOKLYN",z:"11238",u:3,hpd:16,dob:0,ev:0,tl:0,corp:"FOOD FIRST HDFC, INC"}]},
+{r:15,n:"Joseph Emile",co:"Frontline Property Mgmt",v:1130,b:3,bldgs:[
+{a:"229 EAST 18 STREET",bo:"BROOKLYN",z:"11226",u:53,hpd:777,dob:1,ev:0,tl:4,corp:"FRONTLINE PROPERTY MGMT LLC"},
+{a:"1187 EASTERN PARKWAY",bo:"BROOKLYN",z:"11213",u:16,hpd:217,dob:0,ev:0,tl:4,corp:"FRONTLINE PROPERTY MGMT, LLC"},
+{a:"1181 EASTERN PARKWAY",bo:"BROOKLYN",z:"11213",u:16,hpd:136,dob:1,ev:0,tl:4,corp:"FRONTLINE PROPERTY MGMT, LLC"}]},
+{r:16,n:"Maria Notias",co:"",v:1125,b:5,bldgs:[
+{a:"6823 RIDGE BOULEVARD",bo:"BROOKLYN",z:"11220",u:20,hpd:446,dob:0,ev:1,tl:4,corp:""},
+{a:"368 87 STREET",bo:"BROOKLYN",z:"11209",u:16,hpd:215,dob:0,ev:0,tl:0,corp:"364-368 REALTY LLC"},
+{a:"364 87 STREET",bo:"BROOKLYN",z:"11209",u:16,hpd:184,dob:0,ev:0,tl:16,corp:"364-368 REALTY LLC"},
+{a:"586 74 STREET",bo:"BROOKLYN",z:"11209",u:9,hpd:167,dob:0,ev:0,tl:10,corp:""},
+{a:"544 82 STREET",bo:"BROOKLYN",z:"11209",u:6,hpd:113,dob:0,ev:0,tl:0,corp:""}]},
+{r:17,n:"Rick Gropper",co:"",v:1079,b:7,bldgs:[
+{a:"221 LINDEN BOULEVARD",bo:"BROOKLYN",z:"11226",u:72,hpd:273,dob:0,ev:0,tl:0,corp:"PPSP PRESERVATION LLC"},
+{a:"1971 GRAND AVENUE",bo:"BRONX",z:"10453",u:39,hpd:182,dob:0,ev:7,tl:0,corp:"1971 GRAND AVENUE LLC"},
+{a:"2082 CROTONA PARKWAY",bo:"BRONX",z:"10460",u:21,hpd:145,dob:0,ev:4,tl:0,corp:"West Farms Preservation LLC"},
+{a:"1314 SENECA AVENUE",bo:"BRONX",z:"10474",u:60,hpd:134,dob:4,ev:14,tl:0,corp:"1314 Seneca Avenue Owner LLC"},
+{a:"682 OCEAN AVENUE",bo:"BROOKLYN",z:"11226",u:30,hpd:123,dob:0,ev:3,tl:0,corp:"PPSP PRESERVATION LLC"},
+{a:"882 EAST 180 STREET",bo:"BRONX",z:"10460",u:28,hpd:121,dob:0,ev:0,tl:0,corp:"West Farms Preservation LLC"},
+{a:"95 EAST 18 STREET",bo:"BROOKLYN",z:"11226",u:16,hpd:101,dob:0,ev:0,tl:0,corp:"PPSP PRESERVATION LLC"}]},
+{r:18,n:"Thomas Steiner",co:"",v:1049,b:5,bldgs:[
+{a:"2754 GRAND CONCOURSE",bo:"BRONX",z:"10458",u:67,hpd:270,dob:1,ev:2,tl:4,corp:""},
+{a:"1245 STRATFORD AVENUE",bo:"BRONX",z:"10472",u:70,hpd:236,dob:2,ev:0,tl:4,corp:"1245 STRATFORD LLC"},
+{a:"2001 NEWBOLD AVENUE",bo:"BRONX",z:"10462",u:105,hpd:209,dob:5,ev:1,tl:0,corp:"3091 REALTY LLC"},
+{a:"1255 STRATFORD AVENUE",bo:"BRONX",z:"10472",u:70,hpd:184,dob:2,ev:2,tl:4,corp:"1245 STATFORD LLC"},
+{a:"2760 GRAND CONCOURSE",bo:"BRONX",z:"10458",u:58,hpd:150,dob:2,ev:3,tl:4,corp:"2760 GC REALTY LLC"}]},
+{r:19,n:"Melanie Martin",co:"",v:911,b:6,bldgs:[
+{a:"90-38 170 STREET",bo:"QUEENS",z:"11432",u:41,hpd:308,dob:3,ev:0,tl:4,corp:"NAPA PARTNERS, LLC"},
+{a:"709 WEST 170 STREET",bo:"MANHATTAN",z:"10032",u:21,hpd:210,dob:0,ev:0,tl:4,corp:"BELMONT VENTURES, LLC"},
+{a:"705 WEST 170 STREET",bo:"MANHATTAN",z:"10032",u:21,hpd:157,dob:3,ev:0,tl:4,corp:"BELMONT VENTURES, LLC"},
+{a:"412 WEST 46 STREET",bo:"MANHATTAN",z:"10036",u:15,hpd:98,dob:2,ev:0,tl:4,corp:"HIGHPOINT ASSOCIATES XII, LLC"},
+{a:"1585 3 AVENUE",bo:"MANHATTAN",z:"10128",u:14,hpd:71,dob:1,ev:0,tl:4,corp:"HIGHPOINT ASSOCIATES V, LLC"},
+{a:"338 EAST 61 STREET",bo:"MANHATTAN",z:"10065",u:20,hpd:67,dob:0,ev:0,tl:4,corp:"NEWPORT PARTNERS, LLC"}]},
+{r:20,n:"Sam Klein",co:"",v:884,b:9,bldgs:[
+{a:"150 WEST 140 STREET",bo:"MANHATTAN",z:"10030",u:59,hpd:142,dob:0,ev:4,tl:0,corp:"RH 150 WEST 140 STREET LLC"},
+{a:"2056 HONEYWELL AVENUE",bo:"BRONX",z:"10460",u:49,hpd:134,dob:0,ev:0,tl:0,corp:"EAST 179TH ST LLC"},
+{a:"413 EAST 98 STREET",bo:"BROOKLYN",z:"11212",u:35,hpd:125,dob:0,ev:0,tl:0,corp:"RH 912 SARATOGA AVE LLC"},
+{a:"386 EAST 184 STREET",bo:"BRONX",z:"10458",u:3,hpd:118,dob:3,ev:0,tl:0,corp:"386 E 184 ST LLC"},
+{a:"805 FAIRMOUNT PLACE",bo:"BRONX",z:"10460",u:35,hpd:103,dob:4,ev:4,tl:8,corp:"805 FAIRMOUNT PLACE PORTFOLIO LLC"},
+{a:"2016 DAVIDSON AVENUE",bo:"BRONX",z:"10453",u:19,hpd:88,dob:1,ev:3,tl:0,corp:"2016 REALTY LLC"},
+{a:"1790 PROSPECT AVENUE",bo:"BRONX",z:"10457",u:4,hpd:75,dob:0,ev:0,tl:14,corp:"MOUNT ROYAL GROUP LLC"},
+{a:"529 UNDERHILL AVENUE",bo:"BRONX",z:"10473",u:4,hpd:74,dob:0,ev:3,tl:5,corp:"UNDERHILL HOUSING LLC"},
+{a:"869 MACY PLACE",bo:"BRONX",z:"10455",u:3,hpd:25,dob:0,ev:0,tl:4,corp:"MACY HOUSING LLC"}]},
+{r:21,n:"Jeff Mustafaj",co:"",v:871,b:11,bldgs:[
+{a:"628 COURTLANDT AVENUE",bo:"BRONX",z:"10451",u:13,hpd:176,dob:1,ev:0,tl:6,corp:"COURTLANDT HILLS LLC"},
+{a:"2055 HARRISON AVENUE",bo:"BRONX",z:"10453",u:70,hpd:168,dob:1,ev:1,tl:0,corp:"HARRISON HILLS 55 LLC"},
+{a:"133 WEST 145 STREET",bo:"MANHATTAN",z:"10039",u:29,hpd:118,dob:2,ev:2,tl:8,corp:"133 W 145 LLC"},
+{a:"3206 3 AVENUE",bo:"BRONX",z:"10451",u:6,hpd:67,dob:4,ev:0,tl:8,corp:"FIFTH AVENUE HILLS LLC"},
+{a:"2099 WEBSTER AVENUE",bo:"BRONX",z:"10457",u:8,hpd:58,dob:0,ev:0,tl:11,corp:"FIRST 26 LLC"},
+{a:"2113 BELMONT AVENUE",bo:"BRONX",z:"10457",u:9,hpd:57,dob:2,ev:1,tl:3,corp:"BELMONT PLACE LLC"},
+{a:"943 EAST 179 STREET",bo:"BRONX",z:"10460",u:9,hpd:52,dob:1,ev:0,tl:4,corp:"FORTH INDEPENDENT AVE LLC"},
+{a:"501 EAST 176 STREET",bo:"BRONX",z:"10457",u:6,hpd:50,dob:0,ev:0,tl:0,corp:"3RD AVENUE HEIGHTS LLC"},
+{a:"430 EAST 162 STREET",bo:"BRONX",z:"10451",u:8,hpd:48,dob:0,ev:0,tl:3,corp:"KUNBA LLC"},
+{a:"363 EAST 180 STREET",bo:"BRONX",z:"10457",u:9,hpd:41,dob:0,ev:3,tl:4,corp:"WEBSTER 26 LLC"},
+{a:"983 BOSTON ROAD",bo:"BRONX",z:"10456",u:3,hpd:36,dob:0,ev:2,tl:0,corp:"PROSPECT PLACE 26 LLC"}]},
+{r:22,n:"Karan Singh",co:"Fordham Fulton Realty",v:837,b:2,bldgs:[
+{a:"530 EAST 169 STREET",bo:"BRONX",z:"10456",u:321,hpd:821,dob:23,ev:0,tl:4,corp:"FORDHAM FULTON REALTY"},
+{a:"215-07 HILLSIDE AVENUE",bo:"QUEENS",z:"11427",u:3,hpd:16,dob:0,ev:0,tl:0,corp:"THE GRANGE USA INC."}]},
+{r:23,n:"Robert Izsak",co:"",v:834,b:5,bldgs:[
+{a:"84 LAWRENCE AVENUE",bo:"BROOKLYN",z:"11230",u:35,hpd:279,dob:2,ev:2,tl:4,corp:"RIZARO LAWRENCE LLC"},
+{a:"3813 18 AVENUE",bo:"BROOKLYN",z:"11218",u:31,hpd:167,dob:0,ev:0,tl:0,corp:"RIZARO 18TH AVE LLC"},
+{a:"1701 EASTBURN AVENUE",bo:"BRONX",z:"10457",u:48,hpd:152,dob:0,ev:11,tl:0,corp:"1701 EASTBURN REALTY LLC"},
+{a:"1806 OCEAN AVENUE",bo:"BROOKLYN",z:"11230",u:36,hpd:132,dob:4,ev:0,tl:0,corp:"1806 OCEAN REALTY LLC"},
+{a:"1015 AVENUE N",bo:"BROOKLYN",z:"11230",u:39,hpd:104,dob:0,ev:1,tl:0,corp:"RIZARO AVENUE N LLC"}]},
+{r:24,n:"John Warren",co:"",v:809,b:8,bldgs:[
+{a:"50 LINDEN BOULEVARD",bo:"BROOKLYN",z:"11226",u:16,hpd:180,dob:3,ev:2,tl:4,corp:"WFHA FLATBUSH LLC"},
+{a:"1208 SOUTHERN BOULEVARD",bo:"BRONX",z:"10459",u:23,hpd:142,dob:1,ev:0,tl:2,corp:"WFHA HOME STREET LLC."},
+{a:"936 HOME STREET",bo:"BRONX",z:"10459",u:25,hpd:120,dob:0,ev:4,tl:0,corp:"WFHA HOME STREET LLC."},
+{a:"1163 HOE AVENUE",bo:"BRONX",z:"10459",u:10,hpd:106,dob:1,ev:1,tl:0,corp:"WFHA HOME STREET LLC."},
+{a:"920 KELLY STREET",bo:"BRONX",z:"10459",u:16,hpd:91,dob:0,ev:0,tl:0,corp:"KELLY STREET RESTORATION LP"},
+{a:"928 KELLY STREET",bo:"BRONX",z:"10459",u:8,hpd:76,dob:0,ev:0,tl:0,corp:"KELLY STREET RESTORATION LP"},
+{a:"1160 HOE AVENUE",bo:"BRONX",z:"10459",u:10,hpd:52,dob:0,ev:3,tl:0,corp:"WFHA HOME STREET LLC."},
+{a:"1146 BRYANT AVENUE",bo:"BRONX",z:"10459",u:8,hpd:42,dob:0,ev:0,tl:0,corp:"WFHA HOME STREET LLC."}]},
+{r:25,n:"Leze Gazivoda",co:"",v:789,b:5,bldgs:[
+{a:"2670 BAINBRIDGE AVENUE",bo:"BRONX",z:"10458",u:69,hpd:185,dob:1,ev:7,tl:3,corp:"2670 ASSOCIATES LLC"},
+{a:"2420 PROSPECT AVENUE",bo:"BRONX",z:"10458",u:52,hpd:174,dob:1,ev:1,tl:0,corp:"599 WEST 188TH ST. INC."},
+{a:"2200 ADAMS PLACE",bo:"BRONX",z:"10457",u:27,hpd:157,dob:0,ev:0,tl:0,corp:"611 EAST 182ND STREET LLC"},
+{a:"2255 MORRIS AVENUE",bo:"BRONX",z:"10453",u:43,hpd:154,dob:5,ev:2,tl:0,corp:"2255 MORRIS AVE LLC"},
+{a:"2775 MORRIS AVENUE",bo:"BRONX",z:"10468",u:49,hpd:119,dob:3,ev:2,tl:0,corp:"2775 MORRIS AVE LLC"}]}
 ];
 
-const map=L.map('map',{center:[40.7128,-73.97],zoom:11,zoomControl:false});
-L.control.zoom({position:'bottomright'}).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OSM © CARTO',maxZoom:19,subdomains:'abcd'}).addTo(map);
-
-const cluster=L.markerClusterGroup({maxClusterRadius:50,showCoverageOnHover:false,zoomToBoundsOnClick:true,
-  iconCreateFunction(c){const n=c.getChildCount();let s='small',r=30;if(n>100){s='large';r=44}else if(n>30){s='medium';r=36}return L.divIcon({html:'<div>'+(n>=1000?(n/1000).toFixed(1)+'k':n)+'</div>',className:'marker-cluster marker-cluster-'+s,iconSize:[r,r]});}
-});
-let heat=null,rentLayer=L.layerGroup();
-const layers={markers:true,heat:true,rent:false};
-
-function upd(p,m){document.getElementById('loFill').style.width=p+'%';document.getElementById('loadFi').style.width=p+'%';if(m){document.getElementById('loMsg').textContent=m;document.getElementById('loadSt').textContent=m;}}
-
-async function fetchData(){
-  const LIM=10000;let off=0,tot=0;const MAX=50000;upd(5,'Fetching open HPD violations...');
-  while(off<MAX){
-    try{
-      const url=`${API}${VIO_ID}.json?$limit=${LIM}&$offset=${off}&$where=violationstatus='Open' AND latitude IS NOT NULL&$order=inspectiondate DESC`;
-      const r=await fetch(url);
-      if(!r.ok){if(tot===0){document.getElementById('loErr').style.display='block';document.getElementById('loErr').textContent='API '+r.status+'. Retrying...';const r2=await fetch(`${API}${VIO_ID}.json?$limit=5000&$where=latitude IS NOT NULL&$order=inspectiondate DESC`);if(r2.ok){processRows(await r2.json());tot=5000;}}break;}
-      const d=await r.json();if(!d.length)break;processRows(d);off+=d.length;tot=off;
-      upd(Math.min(70,(off/MAX)*70),`Loaded ${tot.toLocaleString()} violations...`);if(d.length<LIM)break;
-    }catch(e){console.error(e);document.getElementById('loErr').style.display='block';document.getElementById('loErr').textContent='Error: '+e.message;break;}
-  }
-  return tot;
-}
-function processRows(data){
-  data.forEach(v=>{
-    const lat=parseFloat(v.latitude),lng=parseFloat(v.longitude);if(!lat||!lng||isNaN(lat)||isNaN(lng))return;
-    const bid=v.buildingid||'u';
-    if(!bldgs[bid])bldgs[bid]={id:bid,address:(v.housenumber||'')+' '+(v.streetname||''),borough:v.borough||'',zip:v.postcode||'',block:v.block||'',lot:v.lot||'',regid:v.registrationid||'',lat,lng,violations:[],ownerName:null,marker:null};
-    bldgs[bid].violations.push({id:v.violationid,cls:v.class||'',date:v.inspectiondate||'',desc:v.novdescription||'',status:v.currentstatus||'',statusDate:v.currentstatusdate||'',vioStatus:v.violationstatus||'',rentImpair:v.rentimpairing||''});
-  });
-}
-
-function buildMap(){
-  upd(75,'Placing markers...');
-  // Inject watchlist buildings into bldgs first
-  WATCHLIST.forEach(wl=>{
-    const wlRegId='watchlist_'+wl.rank;
-    wl.locs.forEach((loc,i)=>{
-      const bid='wl_'+wl.rank+'_'+i;
-      if(!bldgs[bid]){
-        bldgs[bid]={id:bid,address:loc.addr,borough:loc.boro,zip:loc.zip,block:'',lot:'',regid:wlRegId,lat:loc.lat,lng:loc.lng,violations:[],ownerName:wl.name+(wl.company?' · '+wl.company:''),marker:null};
-        for(let v=0;v<loc.v;v++){
-          bldgs[bid].violations.push({id:'wl'+wl.rank+'_'+i+'_'+v,cls:v<Math.floor(loc.v*.25)?'C':v<Math.floor(loc.v*.6)?'B':'A',
-            date:'2025-01-01',desc:'HPD violation (2025 Watchlist)',status:'',statusDate:'',vioStatus:'Open',rentImpair:''});
-        }
-      }
-    });
-  });
-  
-  Object.values(bldgs).forEach(b=>{
-    const n=b.violations.length,cC=b.violations.filter(v=>v.cls==='C').length;
-    const sz=Math.max(7,Math.min(20,5+n*0.5)),op=Math.min(.9,.35+n/30);
-    const hasC=cC>0;const col=hasC?`rgba(239,68,68,${op})`:`rgba(245,158,11,${op})`;
-    const glow=hasC?`0 0 ${sz*.4}px rgba(239,68,68,.35)`:`0 0 ${sz*.3}px rgba(245,158,11,.25)`;
-    const icon=L.divIcon({className:'bldg-dot',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:1.5px solid rgba(255,255,255,.2);box-shadow:${glow}"></div>`});
-    const m=L.marker([b.lat,b.lng],{icon,riseOnHover:true});
-    m.bindTooltip(`<div style="font-family:Inter,sans-serif;min-width:170px"><div style="font-weight:700;font-size:11px;margin-bottom:2px">${b.address.trim()}</div><div style="font-size:9px;color:#94a3b8;margin-bottom:4px">${b.borough} ${b.zip}</div><div style="display:flex;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px"><span><b style="color:#f59e0b">${n}</b> <span style="color:#64748b;font-size:8px">violations</span></span><span><b style="color:#ef4444">${cC}</b> <span style="color:#64748b;font-size:8px">Class C</span></span></div></div>`,{direction:'top',offset:[0,-sz/2-3],opacity:.97});
-    m.on('click',()=>showInfo(b));
-    b.marker=m;cluster.addLayer(m);
-    heatPts.push([b.lat,b.lng,Math.min(n/15,1)]);
-  });
-  cluster.addTo(map);
-  // Zoom-adaptive heatmap: recreate on zoom
-  updateHeatmap();
-  map.on('zoomend',updateHeatmap);
-}
-
-function updateHeatmap(){
-  if(heat)map.removeLayer(heat);
-  const z=map.getZoom();
-  // Scale radius and blur with zoom — smaller at low zoom to avoid blob
-  const radius=Math.max(8,Math.min(35,(z-9)*5));
-  const blur=Math.max(5,Math.min(25,(z-9)*4));
-  heat=L.heatLayer(heatPts,{radius,blur,maxZoom:17,minOpacity:.08,
-    gradient:{0:'rgba(0,0,0,0)',.15:'#450a0a',.3:'#991b1b',.5:'#ef4444',.7:'#f59e0b',.9:'#fde047',1:'#fef9c3'}});
-  if(layers.heat)heat.addTo(map);
-}
-
-async function showInfo(b){
-  const p=document.getElementById('ip');p.classList.add('visible');
-  document.getElementById('iT').textContent=b.address.trim();
-  document.getElementById('iA').textContent=`${b.borough} ${b.zip} · Block ${b.block} · Lot ${b.lot}`;
-  document.getElementById('iO').innerHTML='⏳ Looking up owner...';
-  const n=b.violations.length,cC=b.violations.filter(v=>v.cls==='C').length,cB=b.violations.filter(v=>v.cls==='B').length;
-  document.getElementById('iS').innerHTML=`<div class="info-stat"><b style="color:var(--amber)">${n}</b><small>Total</small></div><div class="info-stat"><b style="color:var(--red)">${cC}</b><small>Class C</small></div><div class="info-stat"><b style="color:var(--amber)">${cB}</b><small>Class B</small></div>`;
-  const sorted=[...b.violations].sort((a,c)=>new Date(c.date||0)-new Date(a.date||0));
-  let h=`<div class="complaint-list-header">Violations at this building (${n})</div>`;
-  sorted.forEach(v=>{const isOpen=v.vioStatus==='Open';const dt=v.date?new Date(v.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—';const cb=v.cls==='C'?'classC':v.cls==='B'?'classB':'classA';let desc=v.desc||'No description';if(desc.length>180)desc=desc.slice(0,180)+'...';
-    h+=`<div class="complaint-item"><div class="c-type"><span class="c-badge ${cb}">Class ${v.cls||'?'}</span><span class="c-badge ${isOpen?'open':'closed'}">${isOpen?'Open':'Closed'}</span>${v.rentImpair==='Y'?'<span class="c-badge classC">Rent Imp.</span>':''}</div><div class="c-desc">${desc}</div><div class="c-meta"><span>${dt}</span>${v.statusDate?`<span>Upd: ${new Date(v.statusDate).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</span>`:''}</div></div>`;});
-  document.getElementById('iL').innerHTML=h;
-  if(b.regid){
-    if(ownerCache[b.regid]){
-      b.ownerName=ownerCache[b.regid];
-      document.getElementById('iO').innerHTML=`<span style="cursor:pointer;text-decoration:underline;text-decoration-style:dotted" onclick="showLandlordByRegid('${b.regid}')">👤 ${ownerCache[b.regid]}</span> <span style="font-size:9px;color:var(--text3)">(click to see all properties)</span>`;
-      return;
-    }
-    try{const r=await fetch(`${API}${CONTACT_ID}.json?registrationid=${b.regid}&$limit=5`);const contacts=await r.json();
-      if(contacts.length){
-        // Prefer person names: headofficer > individualowner > agent > corporateowner
-        contacts.sort((a,b)=>{const o={headofficer:0,individualowner:1,agent:2,corporateowner:3};return(o[a.type]??4)-(o[b.type]??4);});
-        // Find best person name, fall back to corp name
-        let personName=null,corpName=null;
-        contacts.forEach(c=>{
-          const full=[c.firstname,c.lastname].filter(Boolean).join(' ');
-          if(full&&!personName&&c.type!=='corporateowner')personName=full;
-          if(c.corporationname&&!corpName)corpName=c.corporationname;
-        });
-        const displayName=personName||corpName||'Unknown';
-        const result=personName&&corpName?`${personName} · ${corpName}`:displayName;
-        ownerCache[b.regid]=result;b.ownerName=result;
-        // Make owner name clickable to show all their properties
-        document.getElementById('iO').innerHTML=`<span style="cursor:pointer;text-decoration:underline;text-decoration-style:dotted" onclick="showLandlordByRegid('${b.regid}')">👤 ${result}</span>`;
-      }
-      else document.getElementById('iO').innerHTML='👤 Owner data unavailable';
-    }catch(e){document.getElementById('iO').innerHTML='👤 Could not fetch owner';}
-  }else document.getElementById('iO').innerHTML='👤 No registration ID';
-}
-
-// ========================
-// LANDLORD INDEX — build from loaded data, rank by total violations
-// ========================
-function buildLandlordIndex(){
-  upd(80,'Building landlord rankings...');
-  
-  // Step 1: Inject watchlist buildings into bldgs (if not already from API)
-  WATCHLIST.forEach(wl=>{
-    const wlRegId='watchlist_'+wl.rank;
-    wl.locs.forEach((loc,i)=>{
-      const bid='wl_'+wl.rank+'_'+i;
-      if(!bldgs[bid]){
-        bldgs[bid]={id:bid,address:loc.addr,borough:loc.boro,zip:loc.zip,block:'',lot:'',regid:wlRegId,lat:loc.lat,lng:loc.lng,violations:[],ownerName:wl.name+(wl.company?' · '+wl.company:''),marker:null};
-        // Create placeholder violations based on count
-        for(let v=0;v<loc.v;v++){
-          bldgs[bid].violations.push({id:'wl'+wl.rank+'_'+i+'_'+v,cls:v<Math.floor(loc.v*.25)?'C':v<Math.floor(loc.v*.6)?'B':'A',
-            date:'2025-01-01',desc:'HPD violation (from 2025 Watchlist data)',status:'',statusDate:'',vioStatus:'Open',rentImpair:''});
-        }
-      }
-    });
-    ownerCache[wlRegId]=wl.name+(wl.company?' · '+wl.company:'');
-  });
-  
-  // Step 2: Build watchlist entries for landlord index (always at top)
-  const watchlistEntries=WATCHLIST.map(wl=>{
-    const wlRegId='watchlist_'+wl.rank;
-    const wlBuildings=Object.values(bldgs).filter(b=>b.regid===wlRegId);
-    return{
-      regid:wlRegId,
-      buildings:wlBuildings,
-      totalViolations:wl.violations,
-      name:wl.name,
-      displayName:wl.name+(wl.company?' · '+wl.company:''),
-      rank:wl.rank,
-      isWatchlist:true
-    };
-  });
-  
-  // Step 3: Group remaining (API-loaded) buildings by registrationid
-  const regMap={};
-  Object.values(bldgs).forEach(b=>{
-    if(!b.regid||b.regid.startsWith('watchlist_'))return;
-    if(!regMap[b.regid])regMap[b.regid]={regid:b.regid,buildings:[],totalViolations:0,name:null,displayName:null};
-    regMap[b.regid].buildings.push(b);
-    regMap[b.regid].totalViolations+=b.violations.length;
-  });
-  const apiRanked=Object.values(regMap).sort((a,b)=>b.totalViolations-a.totalViolations).slice(0,100);
-  
-  // Step 4: Combine — watchlist first (always), then API-discovered landlords
-  landlordIndex=[...watchlistEntries,...apiRanked];
-  return landlordIndex;
-}
-
-async function loadLandlordNames(allLandlords){
-  // Only fetch names for non-watchlist entries
-  const toFetch=allLandlords.filter(ll=>!ll.isWatchlist&&!ll.name);
-  for(let i=0;i<Math.min(50,toFetch.length);i++){
-    const ll=toFetch[i];
-    if(ownerCache[ll.regid]){ll.name=ownerCache[ll.regid];continue;}
-    try{
-      const r=await fetch(`${API}${CONTACT_ID}.json?registrationid=${ll.regid}&$limit=3`);
-      const contacts=await r.json();
-      if(contacts.length){
-        contacts.sort((a,b)=>{const o={headofficer:0,individualowner:1,agent:2,corporateowner:3};return(o[a.type]??4)-(o[b.type]??4);});
-        let personName=null,corpName=null;
-        contacts.forEach(c=>{
-          const full=[c.firstname,c.lastname].filter(Boolean).join(' ');
-          if(full&&!personName&&c.type!=='corporateowner')personName=full;
-          if(c.corporationname&&!corpName)corpName=c.corporationname;
-        });
-        const name=personName||corpName||'Unknown';
-        const display=personName&&corpName?`${name} · ${corpName}`:name;
-        ll.name=name;ll.displayName=display;ownerCache[ll.regid]=display;
-        ll.buildings.forEach(b=>{b.ownerName=display;});
-      }else{ll.name='Unknown Owner';}
-    }catch(e){ll.name='Unknown Owner';}
-    // Update UI progressively
-    if(i%5===0)renderLandlordList(landlordIndex.slice(0,50));
-  }
-  renderLandlordList(landlordIndex.slice(0,50));
-}
-
-function renderLandlordList(list){
-  const filter=(document.getElementById('llSearch').value||'').toLowerCase();
-  const filtered=filter?list.filter(ll=>((ll.name||'')+(ll.displayName||'')).toLowerCase().includes(filter)):list;
-  const el=document.getElementById('llList');
-  if(!filtered.length){el.innerHTML='<div style="padding:10px 12px;font-size:10px;color:var(--text3)">No landlords match.</div>';return;}
-  el.innerHTML=filtered.map((ll,i)=>{
-    const rank=ll.rank||landlordIndex.indexOf(ll)+1;
-    const isWL=ll.isWatchlist;
-    return`<div class="ll-item${isWL?' watchlist':''}" data-regid="${ll.regid}" onclick="showLandlord('${ll.regid}')">
-      <div class="ll-rank"${isWL?' style="color:#ef4444"':''}>${rank}</div>
-      <div class="ll-info"><div class="ll-name">${ll.name||'Loading...'}</div><div class="ll-details">${ll.buildings.length} bldg${ll.buildings.length!==1?'s':''}${ll.displayName&&ll.displayName!==ll.name?' · <span style="color:var(--text3)">'+ll.displayName.split('·').pop().trim()+'</span>':''}</div></div>
-      <div class="ll-vcount">${ll.totalViolations.toLocaleString()}</div>
-    </div>`;
-  }).join('');
-}
-
-function showLandlordByRegid(regid){
-  // Check if this regid is already in landlordIndex
-  let ll=landlordIndex.find(l=>l.regid===regid);
-  if(ll){showLandlord(regid);return;}
-  // Not in top list — build an ad-hoc landlord entry from all buildings with this regid
-  const matchingBuildings=Object.values(bldgs).filter(b=>b.regid===regid);
-  if(!matchingBuildings.length)return;
-  const total=matchingBuildings.reduce((s,b)=>s+b.violations.length,0);
-  const name=matchingBuildings[0].ownerName||ownerCache[regid]||'Unknown';
-  // Inject into landlordIndex temporarily
-  const entry={regid,buildings:matchingBuildings,totalViolations:total,name,displayName:name};
-  landlordIndex.push(entry);
-  showLandlord(regid);
-}
-
-function showLandlord(regid){
-  const ll=landlordIndex.find(l=>l.regid===regid);if(!ll)return;
-  // Clear old highlights
-  highlightLayer.clearLayers();
-  // Fly to bounds of all their buildings
-  const latlngs=ll.buildings.map(b=>[b.lat,b.lng]);
-  if(latlngs.length)map.flyToBounds(L.latLngBounds(latlngs).pad(0.3),{maxZoom:14});
-  // Add highlight circles
-  ll.buildings.forEach(b=>{
-    const circle=L.circleMarker([b.lat,b.lng],{radius:14,color:'#ef4444',weight:2,fillColor:'rgba(239,68,68,.15)',fillOpacity:1,className:'bldg-highlight'});
-    circle.bindTooltip(`<div style="font-family:Inter,sans-serif"><div style="font-weight:700;font-size:11px">${b.address.trim()}</div><div style="font-size:9px;color:#94a3b8">${b.violations.length} violations</div></div>`,{direction:'top'});
-    circle.on('click',()=>showInfo(b));
-    highlightLayer.addLayer(circle);
-  });
-  highlightLayer.addTo(map);
-  // Show info panel with summary
-  const ip=document.getElementById('ip');ip.classList.add('visible');
-  document.getElementById('iT').textContent=ll.name||'Unknown';
-  document.getElementById('iA').textContent=`${ll.buildings.length} buildings · ${ll.displayName&&ll.displayName!==ll.name?ll.displayName.split('·').pop().trim():'Registration #'+regid}`;
-  const rankNum=landlordIndex.indexOf(ll)+1;
-  document.getElementById('iO').innerHTML=`👤 ${ll.displayName||ll.name||'Unknown'}${rankNum<=50?' — <b>Rank #'+rankNum+' worst</b>':''}`;
-  const cC=ll.buildings.reduce((s,b)=>s+b.violations.filter(v=>v.cls==='C').length,0);
-  const cB=ll.buildings.reduce((s,b)=>s+b.violations.filter(v=>v.cls==='B').length,0);
-  document.getElementById('iS').innerHTML=`<div class="info-stat"><b style="color:var(--amber)">${ll.totalViolations.toLocaleString()}</b><small>Total</small></div><div class="info-stat"><b style="color:var(--red)">${cC}</b><small>Class C</small></div><div class="info-stat"><b style="color:var(--amber)">${cB}</b><small>Class B</small></div>`;
-  let h=`<div class="complaint-list-header">Properties owned (${ll.buildings.length})</div>`;
-  ll.buildings.sort((a,b)=>b.violations.length-a.violations.length).forEach(b=>{
-    h+=`<div class="complaint-item" style="cursor:pointer" onclick="map.flyTo([${b.lat},${b.lng}],16);showInfo(bldgs['${b.id}'])"><div class="c-type" style="font-size:11px">${b.address.trim()}</div><div class="c-meta"><span>${b.borough} ${b.zip}</span><span style="color:var(--amber)">${b.violations.length} violations</span><span style="color:var(--red)">${b.violations.filter(v=>v.cls==='C').length} Class C</span></div></div>`;
-  });
-  document.getElementById('iL').innerHTML=h;
-  // Mark active in list
-  document.querySelectorAll('.ll-item').forEach(el=>{el.classList.toggle('active',el.dataset.regid===regid);});
-}
-
-document.getElementById('llSearch').addEventListener('input',()=>{if(landlordIndex.length)renderLandlordList(landlordIndex.slice(0,50));});
-
-// ========================
-// SEARCH — address or landlord
-// ========================
-let searchTO;const sI=document.getElementById('searchInput'),sR=document.getElementById('searchResults');
-sI.addEventListener('input',()=>{clearTimeout(searchTO);const q=sI.value.trim().toLowerCase();if(q.length<2){sR.classList.remove('vis');return;}searchTO=setTimeout(()=>doSearch(q),200);});
-sI.addEventListener('focus',()=>{if(sI.value.trim().length>=2)sR.classList.add('vis');});
-document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))sR.classList.remove('vis');});
-
-function doSearch(q){
-  let html='';
-  // Search landlords first
-  const llMatches=landlordIndex.filter(ll=>((ll.name||'')+(ll.displayName||'')).toLowerCase().includes(q)).slice(0,5);
-  llMatches.forEach(ll=>{
-    html+=`<div class="sr-ll" onclick="showLandlord('${ll.regid}');document.getElementById('searchResults').classList.remove('vis')">
-      <div class="sr-ll-name">👤 ${ll.name||'Unknown'}</div>
-      <div class="sr-ll-stats">${ll.displayName&&ll.displayName!==ll.name?ll.displayName.split('·').pop().trim()+' · ':''}${ll.buildings.length} buildings · ${ll.totalViolations.toLocaleString()} violations</div>
-    </div>`;
-  });
-  // Search addresses
-  const all=Object.values(bldgs);let addrCount=0;
-  for(const b of all){if(addrCount>=10)break;
-    if((b.address+' '+b.borough+' '+b.zip).toLowerCase().includes(q)){
-      html+=`<div class="sr-item" onclick="map.flyTo([${b.lat},${b.lng}],16);showInfo(bldgs['${b.id}']);document.getElementById('searchResults').classList.remove('vis')"><div class="sr-addr">${b.address.trim()}</div><div class="sr-meta">${b.borough} ${b.zip} · ${b.violations.length} violations</div>${b.ownerName?`<div class="sr-owner">👤 ${b.ownerName}</div>`:''}</div>`;
-      addrCount++;
-    }
-  }
-  if(!html)html='<div class="sr-empty">No results. Try a different search.</div>';
-  sR.innerHTML=html;sR.classList.add('vis');
-}
+// Compute totals
+const TOTAL_V=W.reduce((s,l)=>s+l.v,0);
+const TOTAL_B=W.reduce((s,l)=>s+l.b,0);
+const TOTAL_BLDGS=W.reduce((s,l)=>s+l.bldgs.length,0);
 
 // ========================
 // RENT DATA with stabilization % and history
+// Sources: Census ACS · StreetEasy · Zillow ZORI · NYC RGB
 // ========================
 function genH(cur,p){const yrs=[2000,2002,2004,2006,2008,2010,2012,2014,2016,2018,2020,2022,2024,2026];const pr={g:[.32,.36,.40,.48,.52,.50,.54,.60,.68,.78,.74,.85,.93,1],s:[.38,.42,.46,.52,.56,.55,.58,.63,.68,.75,.72,.82,.91,1],l:[.45,.50,.55,.62,.68,.64,.67,.72,.78,.85,.82,.90,.95,1],b:[.40,.42,.44,.48,.52,.50,.52,.55,.60,.68,.65,.78,.90,1],q:[.35,.38,.42,.48,.54,.52,.55,.60,.66,.74,.70,.82,.92,1],k:[.30,.34,.38,.46,.52,.50,.56,.64,.72,.82,.76,.88,.94,1]};const pp=pr[p]||pr.s;return yrs.map((y,i)=>({y,r:Math.round(cur*pp[i])}));}
 
@@ -619,6 +567,8 @@ function makeChart(n){
     <div style="font-size:8px;color:#475569;margin-top:3px">Sources: Census ACS · StreetEasy · Zillow ZORI</div></div>`;
 }
 
+let rentLayer=L.layerGroup();
+
 function buildRent(){
   RENTS.forEach(n=>{
     const col=n.r<2000?'#22c55e':n.r<3000?'#f59e0b':n.r<4000?'#f97316':'#ef4444';
@@ -628,29 +578,246 @@ function buildRent(){
   });
 }
 
+// Map setup
+const map=L.map('map',{center:[40.74,-73.92],zoom:11,zoomControl:false});
+L.control.zoom({position:'bottomright'}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OSM © CARTO',maxZoom:19,subdomains:'abcd'}).addTo(map);
+const cluster=L.markerClusterGroup({maxClusterRadius:50,showCoverageOnHover:false,zoomToBoundsOnClick:true,
+  iconCreateFunction(c){const n=c.getChildCount();let s='small',r=30;if(n>100){s='large';r=44}else if(n>30){s='medium';r=36}return L.divIcon({html:'<div>'+(n>=1000?(n/1000).toFixed(1)+'k':n)+'</div>',className:'marker-cluster marker-cluster-'+s,iconSize:[r,r]});}
+});
+let heat=null;
+const layers={markers:true,heat:true,rent:true};
+
+function upd(p,m){document.getElementById('loFill').style.width=p+'%';document.getElementById('loadFi').style.width=p+'%';if(m){document.getElementById('loMsg').textContent=m;document.getElementById('loadSt').textContent=m;}}
+function fmtN(n){return n>=1000?(n/1000).toFixed(1)+'k':n}
+
+// ZIP code centroids — instant fallback coordinates for every NYC ZIP in the dataset
+const ZIP_CENTROIDS={
+  // Queens
+  '11102':[40.7728,-73.9318],'11103':[40.7708,-73.9232],'11104':[40.7434,-73.9183],
+  '11354':[40.7636,-73.8292],'11367':[40.7270,-73.8143],'11368':[40.7481,-73.8622],
+  '11369':[40.7669,-73.8708],'11372':[40.7508,-73.8835],'11373':[40.7453,-73.8764],
+  '11374':[40.7260,-73.8605],'11377':[40.7452,-73.9038],'11412':[40.6905,-73.7588],
+  '11415':[40.7099,-73.8333],
+  // Brooklyn
+  '11204':[40.6173,-73.9799],'11206':[40.7001,-73.9400],'11207':[40.6768,-73.8934],
+  '11208':[40.6727,-73.8733],'11212':[40.6640,-73.9130],'11213':[40.6696,-73.9400],
+  '11216':[40.6820,-73.9500],'11218':[40.6411,-73.9763],'11221':[40.6920,-73.9254],
+  '11223':[40.6016,-73.9668],'11225':[40.6643,-73.9550],'11226':[40.6453,-73.9505],
+  '11233':[40.6795,-73.9157],
+  // Manhattan
+  '10027':[40.8112,-73.9505],'10030':[40.8201,-73.9442],'10032':[40.8432,-73.9399],
+  '10033':[40.8510,-73.9399],'10040':[40.8582,-73.9341],
+  // Bronx
+  '10452':[40.8390,-73.9213],'10453':[40.8564,-73.9130],'10454':[40.8100,-73.9200],
+  '10455':[40.8173,-73.9070],'10456':[40.8293,-73.9140],'10457':[40.8500,-73.9050],
+  '10458':[40.8613,-73.8890],'10459':[40.8240,-73.8950],'10460':[40.8420,-73.8750],
+  '10461':[40.8440,-73.8550],'10462':[40.8479,-73.8663],'10463':[40.8770,-73.9020],
+  '10466':[40.8935,-73.8540],'10467':[40.8790,-73.8720],'10468':[40.8740,-73.9000],
+  '10469':[40.8700,-73.8560],'10470':[40.8960,-73.8660],'10472':[40.8400,-73.8560],
+  '10474':[40.8120,-73.8840],
+};
+
+// Plot all buildings instantly using ZIP centroids, then refine in background
+function loadBuildings(){
+  let plotted=0;
+  for(const ll of W){
+    for(const b of ll.bldgs){
+      const c=ZIP_CENTROIDS[b.z];
+      if(c){
+        // Small random jitter so buildings in same ZIP don't stack on one point
+        b.lat=c[0]+(Math.random()-.5)*0.014;
+        b.lng=c[1]+(Math.random()-.5)*0.014;
+        b._approx=true;
+        plotMarker(b,ll);
+        plotted++;
+      }
+    }
+  }
+  return plotted;
+}
+
+// Background: silently refine each marker to its exact building location
+async function refinePositions(){
+  const jobs=[];
+  for(const ll of W)for(const b of ll.bldgs)if(b._approx)jobs.push({b,ll});
+  // 20 concurrent — NYC GeoSearch has no strict rate limit
+  for(let i=0;i<jobs.length;i+=20){
+    await Promise.allSettled(jobs.slice(i,i+20).map(({b,ll})=>refineOne(b,ll)));
+  }
+  // Refresh heatmap once all refinements are done
+  updateHeatmap();
+}
+
+async function refineOne(b,ll){
+  try{
+    const addr=encodeURIComponent(`${b.a}, ${b.bo}, NY`);
+    const r=await fetch(`https://geosearch.planninglabs.nyc/v2/search?text=${addr}&size=1`);
+    if(!r.ok)return;
+    const d=await r.json();
+    if(!d.features||!d.features.length)return;
+    const[lng,lat]=d.features[0].geometry.coordinates;
+    if(!lat||!lng)return;
+    b.lat=lat;b.lng=lng;b._approx=false;
+    const mk=markers[b.a];
+    if(mk)mk.setLatLng([lat,lng]);
+    if(b._heatIdx!==undefined)heatPts[b._heatIdx]=[lat,lng,heatPts[b._heatIdx][2]];
+  }catch(e){}
+}
+
+function plotMarker(b,ll){
+  const v=b.hpd;
+  const sz=Math.max(8,Math.min(22,6+v*0.02)),op=Math.min(.9,.4+v/400);
+  const col=`rgba(239,68,68,${op})`;
+  const icon=L.divIcon({className:'bldg-dot',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
+    html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:1.5px solid rgba(255,255,255,.2);box-shadow:0 0 ${sz*.4}px rgba(239,68,68,.35)"></div>`});
+  const mk=L.marker([b.lat,b.lng],{icon,riseOnHover:true});
+  mk.bindTooltip(`<div style="font-family:Inter,sans-serif;min-width:180px">
+    <div style="font-weight:700;font-size:11px;margin-bottom:2px">${b.a}</div>
+    <div style="font-size:9px;color:#94a3b8;margin-bottom:2px">${b.bo} ${b.z}</div>
+    <div style="font-size:9px;color:#ef4444;margin-bottom:4px">⚠ #${ll.r} ${ll.n}</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px"><b style="color:#f59e0b">${v}</b> HPD · <b style="color:#94a3b8">${b.u}</b> units · <b style="color:#64748b">${b.dob}</b> DOB</div>
+  </div>`,{direction:'top',offset:[0,-sz/2-3],opacity:.97});
+  mk.on('click',()=>showBldgInfo(b,ll));
+  cluster.addLayer(mk);
+  b._heatIdx=heatPts.length;
+  heatPts.push([b.lat,b.lng,Math.min(v/200,1)]);
+  markers[b.a]=mk;
+}
+
+function showBldgInfo(b,ll){
+  const ip=document.getElementById('ip');ip.classList.add('visible');
+  document.getElementById('iT').textContent=b.a;
+  document.getElementById('iA').textContent=`${b.bo}, NY ${b.z} · ${b.u} units`;
+  document.getElementById('iO').innerHTML=`<span style="cursor:pointer;text-decoration:underline dotted" onclick="showLandlord(${ll.r-1})">👤 ${ll.n}${ll.co?' · '+ll.co:''}</span> <span style="font-size:9px;color:var(--t3)">#${ll.r} Worst Landlord</span>`;
+  document.getElementById('iS').innerHTML=`
+    <div class="info-stat"><b style="color:var(--a)">${b.hpd}</b><small>HPD Vio.</small></div>
+    <div class="info-stat"><b style="color:var(--r)">${b.dob}</b><small>DOB Vio.</small></div>
+    <div class="info-stat"><b style="color:var(--t2)">${b.u}</b><small>Units</small></div>`;
+  let h=`<div class="complaint-list-header">Building Details</div>`;
+  h+=`<div class="complaint-item"><div style="font-weight:600">Corporation</div><div class="c-meta">${b.corp||'Not listed'}</div></div>`;
+  h+=`<div class="complaint-item"><div style="font-weight:600">Evictions (Past 2 Years)</div><div class="c-meta">${b.ev}</div></div>`;
+  h+=`<div class="complaint-item"><div style="font-weight:600">Tax Liens (Past 2 Years)</div><div class="c-meta">${b.tl}</div></div>`;
+  h+=`<div class="complaint-item"><div style="font-weight:600">HPD Violations</div><div class="c-meta">${b.hpd}</div></div>`;
+  h+=`<div class="complaint-item"><div style="font-weight:600">DOB Violations</div><div class="c-meta">${b.dob}</div></div>`;
+  h+=`<div style="padding:8px 0;font-size:9px;color:var(--t3);border-top:1px solid var(--bd);margin-top:6px">Source: <a href="https://www.landlordwatchlist.com" target="_blank" style="color:var(--g)">2025 Worst Landlord Watchlist</a> · <a href="https://whoownswhat.justfix.org" target="_blank" style="color:var(--g)">JustFix ↗</a></div>`;
+  document.getElementById('iL').innerHTML=h;
+}
+
+function showLandlord(idx){
+  const ll=W[idx];if(!ll)return;
+  highlightLayer.clearLayers();
+  const found=ll.bldgs.filter(b=>b.lat&&b.lng);
+  if(found.length){
+    const lls=found.map(b=>[b.lat,b.lng]);
+    map.flyToBounds(L.latLngBounds(lls).pad(.3),{maxZoom:14});
+    found.forEach(b=>{
+      const c=L.circleMarker([b.lat,b.lng],{radius:14,color:'#ef4444',weight:2,fillColor:'rgba(239,68,68,.15)',fillOpacity:1,className:'bldg-highlight'});
+      c.bindTooltip(`<div style="font-family:Inter,sans-serif"><div style="font-weight:700;font-size:11px">${b.a}</div><div style="font-size:9px;color:#94a3b8">${b.hpd} HPD violations · ${b.u} units</div></div>`,{direction:'top'});
+      c.on('click',()=>showBldgInfo(b,ll));
+      highlightLayer.addLayer(c);
+    });
+    highlightLayer.addTo(map);
+  }
+  const ip=document.getElementById('ip');ip.classList.add('visible');
+  document.getElementById('iT').textContent=ll.n;
+  document.getElementById('iA').textContent=`#${ll.r} Worst Landlord · ${ll.b} buildings · ${ll.v.toLocaleString()} violations`;
+  document.getElementById('iO').innerHTML=`👤 ${ll.n}${ll.co?' · '+ll.co:''}`;
+  const totalU=ll.bldgs.reduce((s,b)=>s+b.u,0);
+  document.getElementById('iS').innerHTML=`
+    <div class="info-stat"><b style="color:var(--a)">${ll.v.toLocaleString()}</b><small>HPD Vio.</small></div>
+    <div class="info-stat"><b style="color:var(--g)">${found.length}/${ll.bldgs.length}</b><small>On Map</small></div>
+    <div class="info-stat"><b style="color:var(--t2)">${totalU}</b><small>Units</small></div>`;
+  let h=`<div class="complaint-list-header">Buildings (${ll.bldgs.length})</div>`;
+  ll.bldgs.sort((a,b)=>b.hpd-a.hpd).forEach(b=>{
+    const hasCoords=b.lat&&b.lng;
+    h+=`<div class="complaint-item" ${hasCoords?`onclick="map.flyTo([${b.lat},${b.lng}],16);showBldgInfo(W[${idx}].bldgs.find(x=>x.a==='${b.a.replace(/'/g,"\\'")}'),W[${idx}])"`:''}style="${hasCoords?'':'opacity:.5'}">
+      <div style="font-weight:600;font-size:11px">${b.a}</div>
+      <div class="c-meta"><span>${b.bo} ${b.z}</span><span style="color:var(--a)">${b.hpd} HPD</span><span>${b.u} units</span><span>${b.ev} evictions</span></div>
+      ${b.corp?'<div style="font-size:8px;color:var(--t3);margin-top:2px">'+b.corp+'</div>':''}
+    </div>`;
+  });
+  h+=`<div style="padding:8px 0;font-size:9px;color:var(--t3);border-top:1px solid var(--bd);margin-top:6px">Source: <a href="https://www.landlordwatchlist.com" target="_blank" style="color:var(--g)">2025 Worst Landlord Watchlist</a></div>`;
+  document.getElementById('iL').innerHTML=h;
+  document.querySelectorAll('.ll-item').forEach(el=>{el.classList.toggle('active',el.dataset.idx==idx);});
+}
+
+function updateHeatmap(){
+  if(heat)map.removeLayer(heat);
+  const z=map.getZoom(),radius=Math.max(18,Math.min(55,(z-9)*8)),blur=Math.max(14,Math.min(40,(z-9)*6));
+  heat=L.heatLayer(heatPts,{radius,blur,maxZoom:17,minOpacity:.25,gradient:{0:'rgba(0,0,0,0)',.1:'#450a0a',.25:'#991b1b',.45:'#ef4444',.65:'#f59e0b',.85:'#fde047',1:'#fef9c3'}});
+  if(layers.heat)heat.addTo(map);
+}
+
+// Render landlord list
+function renderList(){
+  const q=(document.getElementById('llSearch').value||'').toLowerCase();
+  const filtered=q?W.filter(l=>(l.n+' '+l.co).toLowerCase().includes(q)):W;
+  document.getElementById('llList').innerHTML=filtered.map(ll=>{
+    return`<div class="ll-item" data-idx="${ll.r-1}" onclick="showLandlord(${ll.r-1})">
+      <div class="ll-rank">${ll.r}</div>
+      <div class="ll-info"><div class="ll-name">${ll.n}</div><div class="ll-details">${ll.b} bldgs${ll.co?' · '+ll.co:''}</div></div>
+      <div class="ll-vcount">${ll.v.toLocaleString()}</div>
+    </div>`;
+  }).join('');
+}
+document.getElementById('llSearch').addEventListener('input',renderList);
+
+// Search
+let sTO;
+document.getElementById('sI').addEventListener('input',()=>{
+  clearTimeout(sTO);const q=document.getElementById('sI').value.trim().toLowerCase();
+  if(q.length<2){document.getElementById('sR').classList.remove('vis');return;}
+  sTO=setTimeout(()=>{
+    let html='';
+    // Search landlords
+    W.filter(l=>(l.n+' '+l.co).toLowerCase().includes(q)).slice(0,5).forEach(ll=>{
+      html+=`<div class="sr-item" onclick="showLandlord(${ll.r-1});document.getElementById('sR').classList.remove('vis')"><div style="font-weight:700;color:var(--r)">⚠ #${ll.r} ${ll.n}</div><div style="font-size:9px;color:var(--t3)">${ll.b} buildings · ${ll.v.toLocaleString()} violations${ll.co?' · '+ll.co:''}</div></div>`;
+    });
+    // Search buildings
+    let bc=0;
+    for(const ll of W){for(const b of ll.bldgs){if(bc>=8)break;
+      if((b.a+' '+b.bo+' '+b.z+(b.corp||'')).toLowerCase().includes(q)){
+        const hasC=b.lat&&b.lng;
+        html+=`<div class="sr-item" onclick="${hasC?`map.flyTo([${b.lat},${b.lng}],16);showBldgInfo(W[${ll.r-1}].bldgs.find(x=>x.a==='${b.a.replace(/'/g,"\\'")}'),W[${ll.r-1}])`:`showLandlord(${ll.r-1})`};document.getElementById('sR').classList.remove('vis')"><div style="font-weight:600">${b.a}</div><div style="font-size:9px;color:var(--t3)">${b.bo} ${b.z} · ${b.hpd} HPD · ${ll.n}</div></div>`;
+        bc++;
+      }
+    }}
+    if(!html)html='<div class="sr-item" style="text-align:center;color:var(--t3)">No results</div>';
+    document.getElementById('sR').innerHTML=html;
+    document.getElementById('sR').classList.add('vis');
+  },200);
+});
+document.getElementById('sI').addEventListener('focus',()=>{if(document.getElementById('sI').value.trim().length>=2)document.getElementById('sR').classList.add('vis');});
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))document.getElementById('sR').classList.remove('vis');});
+
 function tog(el,layer){layers[layer]=!layers[layer];el.classList.toggle('active');
   if(layer==='markers')layers[layer]?cluster.addTo(map):map.removeLayer(cluster);
   else if(layer==='heat'){if(layers[layer])updateHeatmap();else if(heat)map.removeLayer(heat);}
-  else if(layer==='rent')layers[layer]?rentLayer.addTo(map):map.removeLayer(rentLayer);
+  else if(layer==='rent'){if(layers[layer])rentLayer.addTo(map);else map.removeLayer(rentLayer);}
 }
-function fmtN(n){return n>=1000?(n/1000).toFixed(1)+'k':n}
 
-async function init(){
-  upd(2,'Connecting to NYC Open Data API...');
-  try{
-    const count=await fetchData();
-    if(count===0){document.getElementById('loErr').style.display='block';document.getElementById('loErr').textContent='No data. API may be down. Try refreshing.';return;}
-    const all=Object.values(bldgs);const openV=all.reduce((s,b)=>s+b.violations.filter(v=>v.vioStatus==='Open').length,0);
-    document.getElementById('sV').textContent=fmtN(count);document.getElementById('sB').textContent=fmtN(all.length);document.getElementById('sO').textContent=fmtN(openV);
-    buildMap();buildRent();
-    const ranked=buildLandlordIndex();
-    renderLandlordList(ranked.slice(0,50));  // Shows watchlist names immediately
-    document.getElementById('loadArea').querySelector('.load-bar').style.display='none';
-    document.getElementById('loadSt').textContent=`✓ ${count.toLocaleString()} violations · ${all.length.toLocaleString()} buildings`;
-    upd(100,'Ready');setTimeout(()=>document.getElementById('lo').classList.add('done'),600);
-    // Load landlord names in background (doesn't block UI)
-    loadLandlordNames(ranked);
-  }catch(e){console.error(e);document.getElementById('loErr').style.display='block';document.getElementById('loErr').textContent='Error: '+e.message;}
+// Init
+function init(){
+  document.getElementById('sV').textContent=fmtN(TOTAL_V);
+  document.getElementById('sB').textContent=TOTAL_B;
+  document.getElementById('sP').textContent=Math.round((TOTAL_V/NYC_TOTAL)*100)+'%';
+  renderList();
+  
+  const plotted=loadBuildings();   // synchronous — instant
+  cluster.addTo(map);
+  updateHeatmap();
+  map.on('zoomend',updateHeatmap);
+
+  buildRent();
+  rentLayer.addTo(map);
+  
+  document.getElementById('loadSt').textContent=`✓ ${plotted} buildings plotted · ${TOTAL_V.toLocaleString()} violations`;
+  upd(100,'Ready');
+  document.getElementById('lo').classList.add('done');  // hide overlay immediately
+  
+  // Silently refine marker positions in the background
+  refinePositions();
 }
 window.addEventListener('load',init);
 </script>
